@@ -1,0 +1,13 @@
+{
+  "name": "mirsaid-maftuna-taklifnoma",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mirsaid & Maftuna to'y taklifnomasi",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mirsaid &amp; Maftuna — Taklifnoma</title>
+<meta name="description" content="Mirsaid va Maftunaning to'y taklifnomasi. 2026-yil 17-oktabr kuni, Namangan viloyati Uchqo'rg'on tumanidagi «Start» to'yxonasida sizni kutamiz.">
+<meta name="theme-color" content="#3e0001">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233e0001'/%3E%3Cpath d='M16 25s-9-5.6-9-11.8C7 9.7 9.4 8 11.8 8c1.7 0 3.2.9 4.2 2.3C17 8.9 18.5 8 20.2 8 22.6 8 25 9.7 25 13.2 25 19.4 16 25 16 25z' fill='%23e1bc7c'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/EBGaramond-Variable.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/Lora-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/Pattaya-Regular.woff" as="font" type="font/woff" crossorigin>
+<style>
+@font-face{font-family:'EB Garamond';src:url(fonts/EBGaramond-Variable.ttf) format('truetype');font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:'Lora';src:url(fonts/Lora-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Pattaya';src:url(fonts/Pattaya-Regular.woff) format('woff');font-weight:400;font-style:normal;font-display:swap}
+
+:root{
+  --bg:#190000;
+  --maroon:#3e0001;
+  --maroon-2:#56000c;
+  --gold:#e1bc7c;
+  --gold-2:#c9974f;
+  --gold-soft:rgba(225,188,124,.55);
+  --line:rgba(225,188,124,.28);
+  --text:#ecd4a3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-variant-numeric:lining-nums;
+  background:#0f0000;color:var(--text);
+  font-family:"EB Garamond",Georgia,serif;
+  min-height:100vh;overflow-x:hidden;
+}
+body.locked{overflow:hidden;height:100vh}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:inherit}
+img{max-width:100%}
+
+/* ---------- page shell ---------- */
+#app{
+  position:relative;max-width:430px;margin:0 auto;min-height:100vh;
+  background-image:
+    radial-gradient(130% 55% at 50% 0%,rgba(120,10,10,.35),transparent 60%),
+    linear-gradient(180deg,rgba(20,0,0,.15) 0%,rgba(10,0,0,.35) 100%),
+    url(images/background.webp);
+  background-repeat:no-repeat,no-repeat,repeat-y;
+  background-size:100% 100%,100% 100%,100% auto;
+  box-shadow:0 0 80px rgba(0,0,0,.85);
+}
+.hidden{display:none!important}
+
+/* ---------- envelope ---------- */
+#envelope{
+  position:fixed;inset:0;z-index:50;overflow:hidden;
+  background:radial-gradient(90% 60% at 50% 38%,#4a0007 0%,#1c0000 62%,#0a0000 100%);
+  transition:opacity 1.1s ease,visibility 1.1s;
+}
+#envelope.done{opacity:0;visibility:hidden;pointer-events:none}
+#dust{position:absolute;inset:0;width:100%;height:100%}
+.ev-wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px}
+.ev-top{text-align:center;margin-bottom:34px;animation:evIn 1.1s .2s both}
+.ev-eyebrow{font-family:"Lora",serif;letter-spacing:.34em;text-transform:uppercase;font-size:11.5px;color:var(--gold-soft);margin-bottom:8px}
+.ev-guest{font-family:"Pattaya",cursive;font-size:40px;line-height:1.2;color:var(--gold);text-shadow:0 0 26px rgba(225,188,124,.38);max-width:88vw;overflow-wrap:anywhere}
+.ev-line{display:flex;align-items:center;gap:10px;justify-content:center;width:150px;margin:10px auto 0;color:var(--gold)}
+.ev-line i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-soft))}
+.ev-line i:last-child{background:linear-gradient(90deg,var(--gold-soft),transparent)}
+@keyframes evIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes evRise{from{opacity:0;transform:translateY(80px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes evFloat{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -8px;rotate:.6deg}}
+
+.env3d{
+  position:relative;width:min(310px,82vw);aspect-ratio:300/210;perspective:1100px;cursor:pointer;
+  animation:evRise 1.3s .35s cubic-bezier(.2,.9,.3,1) both,evFloat 6s 1.8s ease-in-out infinite;
+}
+.env3d>*{position:absolute}
+.env3d svg{left:0;top:0;width:100%;height:auto;display:block;overflow:visible}
+.env-glow{left:50%;top:50%;width:150%;height:170%;translate:-50% -50%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(225,188,124,.22),rgba(225,188,124,0) 62%);animation:glowPulse 4s ease-in-out infinite}
+.e-back{z-index:1;filter:drop-shadow(0 24px 30px rgba(0,0,0,.6))}
+.e-letter{
+  z-index:2;left:5%;right:5%;bottom:5%;height:88%;border-radius:6px;
+  background:linear-gradient(160deg,#5a0009,#220000);border:1px solid rgba(225,188,124,.7);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  box-shadow:0 0 30px rgba(225,188,124,.2);
+  transition:transform 1.15s cubic-bezier(.3,.9,.3,1) .75s,opacity 1s ease;
+}
+.e-letter::before{content:"";position:absolute;inset:6px;border:1px solid rgba(225,188,124,.35);border-radius:3px;pointer-events:none}
+.lt-eyebrow{font-family:"Lora",serif;letter-spacing:.3em;text-transform:uppercase;font-size:9.5px;color:var(--gold-soft)}
+.lt-names{font-family:"Pattaya",cursive;font-size:30px;line-height:1.2;color:var(--gold);margin:6px 0 4px;white-space:nowrap}
+.lt-names em{font-family:"EB Garamond",serif;font-style:normal;font-size:19px;margin:0 6px}
+.lt-date{font-family:"Lora",serif;font-size:12.5px;color:#cbb07a}
+.e-front{z-index:3}
+.e-flap{z-index:4;height:auto;transform-origin:50% 0;transition:transform .95s cubic-bezier(.5,0,.2,1),filter .95s,z-index 0s}
+.e-seal{
+  z-index:6;left:50%;top:58%;width:19%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#f9e0a6,#c9974f 68%,#8a5a20);
+  box-shadow:0 0 0 3px rgba(225,188,124,.22),0 0 30px rgba(225,188,124,.65),0 6px 12px rgba(0,0,0,.55);
+  display:grid;place-items:center;animation:sealPulse 2.4s ease-in-out infinite;
+}
+.e-seal svg{position:static;width:44%;height:auto;fill:#3e0001}
+@keyframes sealPulse{0%,100%{box-shadow:0 0 0 3px rgba(225,188,124,.2),0 0 22px rgba(225,188,124,.5),0 6px 12px rgba(0,0,0,.55)}50%{box-shadow:0 0 0 7px rgba(225,188,124,.08),0 0 42px rgba(225,188,124,.85),0 6px 12px rgba(0,0,0,.55)}}
+@keyframes sealBreak{0%{transform:scale(1) rotate(0);opacity:1}35%{transform:scale(1.28) rotate(-12deg);opacity:1}100%{transform:scale(.1) rotate(40deg);opacity:0}}
+.burst{left:50%;top:58%;width:0;height:0;z-index:7;pointer-events:none}
+.burst i{position:absolute;border-radius:50%;opacity:0;animation:bsFly .95s ease-out forwards}
+@keyframes bsFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+
+#envelope.opening .e-seal{animation:sealBreak .6s ease-in forwards}
+#envelope.opening .e-flap{transform:rotateX(180deg);filter:brightness(.55);z-index:0;transition:transform .95s cubic-bezier(.5,0,.2,1) .35s,filter .95s .35s,z-index 0s .75s}
+#envelope.opening .e-letter{transform:translateY(-56%)}
+#envelope.opening .env3d{animation:evFloat 6s ease-in-out infinite}
+#envelope.opening .ev-top,#envelope.opening .ev-bottom{opacity:0;transform:translateY(10px);transition:opacity .7s,transform .7s}
+#envelope.lift .e-letter{z-index:8;transform:translateY(-74%) scale(1.14);transition:transform .9s cubic-bezier(.3,.9,.3,1),opacity 1s ease}
+#envelope.zoom .e-letter{transform:translateY(-70%) scale(3.4);opacity:0;transition:transform 1.1s cubic-bezier(.6,0,.9,.4),opacity .9s ease .2s}
+
+.ev-bottom{margin-top:40px;text-align:center;animation:evIn 1.1s 1.1s both}
+.ev-msg{font-family:"Lora",serif;font-size:15.5px;color:#c9b07c;margin-bottom:16px;animation:hint 2.6s ease-in-out infinite}
+.btn-gold{
+  position:relative;z-index:2;display:inline-block;padding:13px 32px;border-radius:999px;overflow:hidden;
+  background:linear-gradient(180deg,#eac889,#d9a95e);color:#2b0001;font-weight:600;font-size:17px;
+  font-family:"Lora",serif;box-shadow:0 0 22px rgba(225,188,124,.4),0 4px 10px rgba(0,0,0,.4);
+  transition:transform .2s,box-shadow .2s;
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(225,188,124,.6),0 6px 14px rgba(0,0,0,.4)}
+.btn-gold.sm{padding:9px 22px;font-size:15px;font-family:"EB Garamond",serif;font-weight:700}
+.rsvp-note{margin:14px 10px 0;text-align:center;font-size:15px;line-height:1.5;color:#cbb07a}
+.btn-gold.shine::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:sweep 3.2s ease-in-out infinite}
+@keyframes sweep{0%,55%{left:-70%}100%{left:130%}}
+.spark{position:absolute;color:var(--gold);opacity:0;animation:twinkle 4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:.85;transform:scale(1)}}
+
+/* ---------- typography helpers ---------- */
+.gold{color:var(--gold)}
+.eyebrow{letter-spacing:.32em;font-size:12.5px;text-transform:uppercase;color:var(--gold-soft)}
+.title{
+  font-family:"EB Garamond",serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  font-size:19px;color:var(--gold);text-align:center;
+  text-shadow:0 0 18px rgba(225,188,124,.25);
+}
+.script{font-family:"Pattaya",cursive;color:var(--gold);line-height:1.15;font-weight:400}
+.center{text-align:center}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:36px 20px 70px;text-align:center}
+.hero-flower{display:block;width:min(360px,92%);margin:0 auto 6px;opacity:0;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
+body.go .hero-flower{animation:fadeUp 1.3s .1s both}
+.hero .script.n{
+  font-size:56px;display:block;width:max-content;margin:14px auto 0;padding:6px 10px;
+  background:linear-gradient(100deg,#c9974f 0%,#f8e4b0 42%,#c9974f 62%);background-size:260% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  clip-path:inset(-60% 100% -40% -10%);
+}
+.hero .eyebrow,.hero .amp{opacity:0}
+body.go .hero .eyebrow{animation:fadeUp 1s .1s both}
+body.go .hero .n.a{animation:wipe 1.9s .4s cubic-bezier(.6,.05,.2,1) both,shimmer 6s 2.4s linear infinite}
+body.go .hero .amp{animation:popIn .9s 1.5s cubic-bezier(.3,1.5,.5,1) both}
+body.go .hero .n.b{animation:wipe 1.9s 1.9s cubic-bezier(.6,.05,.2,1) both,shimmer 6s 3.8s linear infinite}
+@keyframes wipe{from{clip-path:inset(-60% 100% -40% -10%)}to{clip-path:inset(-60% -10% -40% -10%)}}
+@keyframes popIn{from{opacity:0;transform:scale(.3) rotate(-25deg)}to{opacity:1;transform:none}}
+@keyframes shimmer{0%{background-position:120% 0}100%{background-position:-140% 0}}
+.hero .amp{display:block;font-family:"EB Garamond",serif;font-size:30px;margin:-2px 0 -6px;color:var(--gold)}
+.gorn{display:block;color:var(--gold);overflow:visible;filter:drop-shadow(0 0 6px rgba(225,188,124,.25))}
+.hero-divider{width:min(240px,66%);height:auto;margin:18px auto 0;opacity:0}
+body.go .hero-divider{animation:fadeUp 1.2s 2.6s both}
+
+/* arch photo (hero) */
+.arch{position:relative;width:min(270px,72vw);margin:34px auto 0;cursor:zoom-in}
+.hero-photo{opacity:0}
+body.go .hero-photo{animation:archIn 1.6s 3.2s cubic-bezier(.2,.9,.3,1) both}
+@keyframes archIn{from{opacity:0;transform:translateY(46px) scale(.93)}to{opacity:1;transform:none}}
+.arch::before{content:"";position:absolute;inset:-30px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(225,188,124,.2),rgba(225,188,124,0) 66%);animation:glowPulse 5s ease-in-out infinite}
+.arch-ring{position:relative;padding:7px;border-radius:50% 50% 18px 18px / 33.4% 33.4% 18px 18px;
+  background:linear-gradient(160deg,#f6dda8,#b98442 46%,#f1d08f);
+  box-shadow:0 0 40px rgba(225,188,124,.24),0 16px 40px rgba(0,0,0,.6)}
+.arch-in{border-radius:50% 50% 12px 12px / 33% 33% 12px 12px;border:3px solid #2b0001;overflow:hidden;aspect-ratio:4/5;background:#200000}
+.arch-in img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
+.arch-orn{position:absolute;left:50%;top:-20px;width:96px;translate:-50% 0;z-index:2;filter:drop-shadow(0 0 6px rgba(0,0,0,.8))}
+.arch-gem{position:absolute;left:50%;bottom:-9px;width:17px;height:17px;translate:-50% 0;rotate:45deg;
+  background:linear-gradient(135deg,#f6dda8,#b98442);border:2px solid #2b0001;z-index:2;box-shadow:0 0 12px rgba(225,188,124,.6)}
+
+/* story photos */
+.story{position:relative;margin-top:26px}
+.story .photo-frame{margin-top:0}
+.story .p2{width:86%;margin:-34px 0 0 auto;rotate:2.5deg;z-index:2}
+.story .p1{width:92%;rotate:-2deg}
+.story .photo-in.land{aspect-ratio:3/2}
+.story .photo-in.port{aspect-ratio:736/606}
+.story-heart{position:absolute;left:8%;bottom:-16px;width:40px;height:40px;border-radius:50%;z-index:3;
+  display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#f9e0a6,#c9974f 70%);
+  border:2px solid #2b0001;box-shadow:0 0 18px rgba(225,188,124,.6);animation:sealPulse 2.4s ease-in-out infinite}
+.story-heart svg{width:18px;height:18px;fill:#3e0001}
+.story-cap{margin-top:34px;text-align:center;font-style:italic;font-size:16.5px;line-height:1.55;color:var(--gold)}
+
+/* preloader inside envelope */
+.load{width:180px;margin:14px auto 0;transition:opacity .5s}
+.load .bar{height:3px;border-radius:3px;background:rgba(225,188,124,.18);overflow:hidden}
+.load .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c9974f,#f8e4b0);box-shadow:0 0 10px rgba(225,188,124,.7);transition:width .3s ease}
+.load small{display:block;margin-top:8px;font-family:"Lora",serif;font-size:12px;letter-spacing:.12em;color:var(--gold-soft)}
+.load.ok{opacity:0}
+.btn-gold:disabled{filter:grayscale(.5) brightness(.75);cursor:wait;box-shadow:none}
+.btn-gold:disabled::after{display:none}
+.scroll-hint{margin-top:30px;color:var(--gold-soft);animation:bob 2s ease-in-out infinite;display:inline-block}
+@keyframes bob{50%{translate:0 8px}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- framed card ---------- */
+.frame{position:relative;margin:0;padding:0}
+.fdiv{width:min(250px,70%);height:auto;margin:20px auto 18px}
+.frame-inner{position:relative;display:flow-root;padding:0 30px}
+.sec{margin-top:50px}
+.sec:first-child{margin-top:8px}
+
+/* parents / address */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px;text-align:center}
+.two-col h4{font-weight:600;font-size:17px;color:var(--gold);margin-bottom:10px;font-family:"EB Garamond",serif}
+.two-col p{font-size:14px;margin-bottom:8px;color:var(--gold)}
+.announce{margin-top:28px;margin-bottom:30px;font-size:17px;line-height:1.6;text-align:center;color:var(--gold)}
+.ceremony{margin-top:46px;text-align:center;font-size:14px;line-height:1.7}
+.datebar{display:flex;align-items:center;justify-content:center;gap:14px;text-transform:uppercase;font-size:13px}
+.datebar b{font-weight:400;font-size:32px;padding:0 16px;border-left:1px solid var(--gold);border-right:1px solid var(--gold);line-height:1.15;font-family:"EB Garamond",serif}
+.year{margin-top:16px;text-align:center;font-size:20px;font-family:"EB Garamond",serif;color:var(--gold)}
+
+/* ---------- countdown/calendar ---------- */
+.count-title{margin-top:38px;text-align:center;font-family:"Lora",serif;font-size:18px;color:var(--gold)}
+.cd{display:flex;justify-content:center;gap:10px;margin-top:22px}
+.cd>div{flex:1;max-width:76px;padding:12px 0 10px;text-align:center;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.2)}
+.cd b{display:block;font-family:"EB Garamond",serif;font-weight:600;font-size:28px;line-height:1;color:var(--gold)}
+.cd small{display:block;margin-top:6px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#a58a58}
+.cd-done{padding:14px 0;font-family:"EB Garamond",serif;font-weight:700;font-size:19px;color:var(--gold);text-align:center;width:100%}
+.cal{
+  margin-top:24px;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  background:rgba(0,0,0,.18);
+}
+.cal .mh{padding:14px 0;text-align:center;font-weight:700;font-size:14px;color:var(--gold);font-family:"EB Garamond",serif}
+.cal .dow,.cal .days{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.cal .dow{border-top:1px solid var(--line);border-bottom:1.5px solid var(--gold);padding:8px 0;font-size:12px;color:#a58a58}
+.cal .days{padding:8px 4px 14px;row-gap:2px}
+.cal .days span{height:38px;display:grid;place-items:center;font-size:14px;color:var(--gold);position:relative}
+.cal .days .hit svg{position:absolute;inset:0;margin:auto;width:32px;height:32px;fill:var(--gold-2)}
+.cal .days .hit b{position:relative;color:#2b0001;font-weight:600;z-index:1}
+.linkbtn{display:block;margin:24px auto 0;text-align:center;border-bottom:1px solid var(--gold);padding-bottom:1px;width:max-content;font-size:16px;color:var(--gold)}
+.center-btn{display:block;margin:30px auto 0}
+
+/* ---------- venue ---------- */
+.venue-sec{padding:6px 20px 0;text-align:center}
+.venue-sec p{color:var(--gold);line-height:1.55;font-size:16px}
+.venue-sec .hr{height:1px;background:var(--line);margin:18px 0 0}
+.photo-frame{position:relative;margin:26px auto 0;padding:6px;border-radius:18px;
+  background:linear-gradient(135deg,#f6dda8,#b98442 46%,#f1d08f);
+  box-shadow:0 0 34px rgba(225,188,124,.2),0 12px 30px rgba(0,0,0,.55)}
+.photo-in{border-radius:12px;overflow:hidden;border:3px solid #2b0001;aspect-ratio:4/3;background:#200000}
+.photo-in img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.1);transition:transform 2.2s cubic-bezier(.2,.8,.2,1)}
+.rv.in .photo-in img{transform:scale(1)}
+.fc{position:absolute;width:34px;height:auto;z-index:2;filter:drop-shadow(0 0 4px rgba(0,0,0,.6))}
+.fc.tl{left:-9px;top:-9px}
+.fc.tr{right:-9px;top:-9px;transform:scaleX(-1)}
+.fc.bl{left:-9px;bottom:-9px;transform:scaleY(-1)}
+.fc.br{right:-9px;bottom:-9px;transform:scale(-1,-1)}
+.map-frame{position:relative;margin:26px auto 0;padding:6px;border-radius:18px;
+  background:linear-gradient(135deg,#f6dda8,#b98442 46%,#f1d08f);
+  box-shadow:0 0 34px rgba(225,188,124,.2),0 12px 30px rgba(0,0,0,.55)}
+.map{border-radius:12px;overflow:hidden;border:3px solid #2b0001;height:230px;position:relative;background:#200000}
+.map iframe{width:100%;height:100%;border:0;filter:saturate(.8) contrast(1.03)}
+.route{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:600;font-size:15px;color:var(--gold);font-family:"Lora",serif}
+
+/* ---------- schedule ---------- */
+.sched{margin:0 auto;width:100%;max-width:340px;position:relative}
+.sched .row{display:grid;grid-template-columns:58px 30px 1fr;align-items:center;min-height:64px;font-size:17px;color:var(--gold)}
+.sched .row .tm{text-align:right}
+.sched .row .dt{position:relative;display:grid;place-items:center;height:100%}
+.sched .row .dt::after{content:"";width:11px;height:11px;border-radius:50%;background:var(--gold);z-index:1}
+.sched .row .dt::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1.5px;background:var(--gold-soft);translate:-50% 0}
+.sched .row:first-child .dt::before{top:50%}
+.sched .row:last-child .dt::before{bottom:50%}
+.sched .row .ev{padding-left:4px;line-height:1.25;min-width:0;overflow-wrap:break-word}
+.sched .row .ev small{display:block;font-size:12.5px;color:#a58a58;margin-top:2px}
+
+/* ---------- wishes ---------- */
+.wish-form{margin:22px 16px 0;padding:24px;border:1px solid var(--line);border-radius:22px;background:rgba(0,0,0,.14)}
+.wish-form input,.wish-form textarea{
+  width:100%;background:rgba(0,0,0,.28);border:1px solid rgba(225,188,124,.4);border-radius:14px;
+  color:var(--gold);font:inherit;font-size:15px;padding:14px 16px;outline:none;
+}
+.wish-form input:focus,.wish-form textarea:focus{border-color:var(--gold)}
+.wish-form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.wish-head{margin:34px 24px 0;text-align:center;font-family:"EB Garamond",serif;font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.wish-head[hidden]{display:none}
+.wish-ok{margin:16px 24px 0;text-align:center;font-size:15.5px;line-height:1.5;color:var(--gold);min-height:24px}
+.wish-form textarea{margin-top:16px;height:110px;resize:none}
+.wish-form ::placeholder{color:rgba(225,188,124,.5)}
+.wish-form .right{display:flex;justify-content:flex-end;margin-top:16px}
+.wishes{margin:26px 16px 0;display:flex;flex-direction:column;gap:12px;max-height:520px;overflow-y:auto;padding-right:2px}
+.wishes::-webkit-scrollbar{width:4px}.wishes::-webkit-scrollbar-thumb{background:var(--gold-soft);border-radius:4px}
+.wish{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:rgba(0,0,0,.14)}
+.wish .h{display:flex;justify-content:space-between;gap:10px;font-size:13px}
+.wish .h b{color:var(--gold);font-size:14.5px}
+.wish .h span{color:#a58a58;font-size:12px;white-space:nowrap}
+.wish p{margin-top:8px;font-size:15.5px;line-height:1.55;color:var(--gold)}
+.empty{text-align:center;color:#a58a58;font-size:15px;padding:10px 0}
+
+/* ---------- reveal & modal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
+.rv.in{opacity:1;transform:none}
+#modal{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:20px}
+#modal.on{display:flex}
+.m-box{width:min(380px,100%);background:linear-gradient(160deg,#4a0007,#1c0000);border:1px solid var(--line);border-radius:18px;padding:26px 22px;text-align:center}
+.m-box h3{font-family:"EB Garamond",serif;font-weight:700;font-size:20px;color:var(--gold);letter-spacing:.04em;margin-bottom:8px}
+.m-box p{color:var(--gold);font-size:15.5px;line-height:1.5;margin-bottom:16px}
+.m-box .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.m-box select{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(225,188,124,.4);border-radius:12px;padding:12px 14px;color:var(--gold);font:inherit;margin-bottom:14px;outline:none}
+.m-box select option{background:#3e0001;color:#e1bc7c}
+.m-box input{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(225,188,124,.4);border-radius:12px;padding:12px 14px;color:var(--gold);font:inherit;margin-bottom:14px;outline:none}
+.m-opts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.m-close{margin-top:14px;font-size:14px;color:#a58a58;text-decoration:underline}
+
+/* music button */
+#music{position:fixed;right:max(14px,calc(50% - 215px + 14px));bottom:20px;z-index:40;width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#f3d59b,#c9974f 75%);display:none;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+#music.show{display:grid}
+#music .mute{opacity:1}
+#music.playing .mute{opacity:0}
+#music.playing::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--gold-soft);animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+
+.sign{margin:6px 28px 0;padding-bottom:44px;text-align:center}
+.sign .orn{display:flex;align-items:center;gap:12px;color:var(--gold-soft);margin-bottom:16px}
+.sign .orn i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line))}
+.sign .orn i:last-child{background:linear-gradient(90deg,var(--line),transparent)}
+.sign small{display:block;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:#8f7a4d;margin-bottom:12px}
+.tg{display:inline-flex;align-items:center;gap:9px;padding:10px 20px 10px 15px;border-radius:999px;
+  border:1px solid rgba(225,188,124,.42);background:rgba(225,188,124,.06);color:var(--gold);text-decoration:none;
+  font-family:"Lora",serif;font-size:14px;letter-spacing:.02em;transition:background .25s,border-color .25s,box-shadow .25s}
+.tg:hover{background:rgba(225,188,124,.15);border-color:var(--gold);box-shadow:0 0 18px rgba(225,188,124,.18)}
+.tg svg{width:18px;height:18px}
+.foot{margin:34px 0 10px;text-align:center;font-size:12.5px;color:#7f6b44;letter-spacing:.05em}
+
+/* gift stage */
+.gift-stage{position:relative;width:320px;max-width:100%;height:330px;margin:10px auto 0;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+.gift-rays{position:absolute;left:50%;top:48%;width:360px;height:360px;translate:-50% -50%;border-radius:50%;pointer-events:none;opacity:.55;
+  background:repeating-conic-gradient(from 0deg,rgba(248,228,176,.22) 0deg 6deg,rgba(248,228,176,0) 6deg 18deg);
+  -webkit-mask:radial-gradient(circle,#000 18%,transparent 66%);mask:radial-gradient(circle,#000 18%,transparent 66%);
+  animation:raysSpin 26s linear infinite}
+@keyframes raysSpin{to{rotate:360deg}}
+.gift-glow{position:absolute;left:50%;top:48%;width:280px;height:280px;translate:-50% -50%;border-radius:50%;
+  background:radial-gradient(circle,rgba(225,188,124,.32),rgba(225,188,124,0) 65%);animation:glowPulse 4s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{opacity:.6;transform:scale(.95)}50%{opacity:1;transform:scale(1.05)}}
+.gift-shadow{position:absolute;left:50%;bottom:30px;width:170px;height:26px;margin-left:-85px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(0,0,0,.65),rgba(0,0,0,0) 70%);animation:shPulse 3.2s ease-in-out infinite}
+@keyframes shPulse{0%,100%{transform:scaleX(1);opacity:.75}50%{transform:scaleX(.86);opacity:.5}}
+.gift-wrap{position:absolute;left:50%;top:58px;width:180px;margin-left:-90px;z-index:3;animation:giftBob 3.2s ease-in-out infinite}
+.gift-box{display:block;width:100%;filter:drop-shadow(0 12px 16px rgba(0,0,0,.5));transform-origin:50% 90%;animation:giftWiggle 5s 2s ease-in-out infinite}
+@keyframes giftBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes giftWiggle{0%,82%,100%{rotate:0deg}85%{rotate:-6deg}88%{rotate:5deg}91%{rotate:-4deg}94%{rotate:3deg}97%{rotate:-1deg}}
+.gift-shine{position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  -webkit-mask:url(images/royal_red.webp) center/contain no-repeat;mask:url(images/royal_red.webp) center/contain no-repeat}
+.gift-shine::after{content:"";position:absolute;top:-20%;left:-60%;width:40%;height:140%;
+  background:linear-gradient(100deg,transparent,rgba(255,240,200,.55),transparent);transform:skewX(-18deg);animation:sweep 4.2s 1s ease-in-out infinite}
+
+.mini{position:absolute;width:44px;height:auto;z-index:2;filter:drop-shadow(0 6px 6px rgba(0,0,0,.5));
+  animation:miniFloat var(--dur,4s) ease-in-out infinite;animation-delay:var(--dl,0s);rotate:var(--rot,0deg)}
+.mini.front{z-index:4}
+@keyframes miniFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.gift-stage.pop .mini{animation:miniBlast 1.6s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes miniBlast{0%{transform:translate(0,0) scale(1)}35%{transform:translate(var(--bx),var(--by)) scale(1.25)}70%{transform:translate(calc(var(--bx)*.4),calc(var(--by)*.4)) scale(1.05)}100%{transform:translate(0,0) scale(1)}}
+
+.gift-stage.shake .gift-box{animation:boxShake .5s linear}
+@keyframes boxShake{0%,100%{rotate:0deg;scale:1}20%{rotate:-9deg;scale:1.04}40%{rotate:8deg;scale:1.06}60%{rotate:-6deg;scale:1.06}80%{rotate:4deg;scale:1.04}}
+.gift-stage.pop .gift-box{animation:boxPop .9s cubic-bezier(.3,1.5,.5,1) forwards}
+@keyframes boxPop{0%{transform:translateY(0) scale(1)}35%{transform:translateY(-34px) scale(1.16)}65%{transform:translateY(-8px) scale(1.04)}100%{transform:translateY(-10px) scale(1.07)}}
+.gift-stage.pop .gift-glow{animation:glowFlash 1.1s ease-out}
+@keyframes glowFlash{0%{opacity:.6;transform:scale(1)}25%{opacity:1;transform:scale(1.7)}100%{opacity:.7;transform:scale(1)}}
+.gift-stage.pop .gift-rays{animation:raysSpin 26s linear infinite,raysBoom 1.2s ease-out}
+@keyframes raysBoom{0%{opacity:.55;scale:1}30%{opacity:1;scale:1.45}100%{opacity:.55;scale:1}}
+.flash{position:absolute;left:50%;top:44%;width:30px;height:30px;translate:-50% -50%;border-radius:50%;pointer-events:none;z-index:5;opacity:0;
+  background:radial-gradient(circle,#fff8e2,rgba(248,228,176,.6) 40%,rgba(248,228,176,0) 70%)}
+.gift-stage.pop .flash{animation:flash .9s ease-out}
+@keyframes flash{0%{opacity:0;transform:scale(1)}20%{opacity:1;transform:scale(8)}100%{opacity:0;transform:scale(12)}}
+.ring{position:absolute;left:50%;top:44%;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;border:2px solid rgba(248,228,176,.8);opacity:0;pointer-events:none;z-index:5}
+.gift-stage.pop .ring{animation:ringOut 1.1s ease-out}
+.gift-stage.pop .ring.r2{animation-delay:.18s}
+@keyframes ringOut{0%{opacity:.9;transform:scale(.4)}100%{opacity:0;transform:scale(3.6)}}
+
+.sp{position:absolute;width:14px;color:var(--gold);animation:twinkle2 3.4s ease-in-out infinite;animation-delay:var(--d,0s);opacity:0;z-index:4}
+.sp.s2{width:10px}.sp.s3{width:8px}
+@keyframes twinkle2{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(20deg)}}
+.tap{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:-6px;font-family:"Lora",serif;font-size:14px;color:#d0b27a;animation:hint 2.2s ease-in-out infinite}
+.tap svg{width:18px;height:18px;animation:tapFinger 1.6s ease-in-out infinite}
+@keyframes tapFinger{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(.92)}}
+@keyframes hint{0%,100%{opacity:.5}50%{opacity:1}}
+
+.burstbox{position:absolute;left:50%;top:44%;width:0;height:0;pointer-events:none;z-index:6}
+.burstbox i{position:absolute;left:0;top:0;opacity:0;animation:pFly var(--t,1.4s) cubic-bezier(.15,.8,.3,1) forwards;animation-delay:var(--dl,0s)}
+.burstbox i.c{width:8px;height:12px;border-radius:2px}
+.burstbox i.h{width:16px;height:16px;color:#ff8a9b}
+.burstbox i.h svg{width:100%;height:100%;fill:currentColor;display:block}
+.burstbox i.s{width:12px;height:12px;color:#fde6ad}
+.burstbox i.s svg{width:100%;height:100%;fill:currentColor;display:block}
+@keyframes pFly{0%{transform:translate(0,0) rotate(0) scale(.6);opacity:0}10%{opacity:1}100%{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1);opacity:0}}
+
+/* bottom sheet */
+#sheetBack{position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.62);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+#sheetBack.on{opacity:1;visibility:visible}
+#sheet{position:fixed;left:50%;bottom:0;z-index:96;width:min(430px,100%);transform:translate(-50%,105%);
+  visibility:hidden;transition:transform .5s cubic-bezier(.2,.9,.3,1),visibility 0s .5s;border-radius:22px 22px 0 0;overflow:hidden;
+  background:linear-gradient(170deg,#56000c,#1c0000);box-shadow:0 -10px 50px rgba(0,0,0,.6)}
+#sheet.on{transform:translate(-50%,0);visibility:visible;transition:transform .5s cubic-bezier(.2,.9,.3,1),visibility 0s}
+.sh-head{display:flex;align-items:center;justify-content:center;position:relative;height:66px;background:linear-gradient(180deg,#eac889,#dbab60)}
+.sh-head span{font-family:"EB Garamond",serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:19px;color:#2b0001}
+.sh-head button{position:absolute;right:16px;top:50%;translate:0 -50%;font-size:30px;line-height:1;color:rgba(43,0,1,.8);padding:4px 8px}
+.sh-body{padding:26px 28px 38px;text-align:center}
+.sh-icon{width:54px;height:auto;margin:0 auto 12px;display:block;animation:giftBob 3s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+.sh-body p{font-family:"EB Garamond",serif;font-size:21px;line-height:1.5;color:var(--gold);min-height:64px;display:grid;place-items:center}
+.sh-orn{display:flex;align-items:center;gap:10px;justify-content:center;margin:16px auto 20px;width:60%;color:var(--gold-soft)}
+.sh-orn i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-soft))}
+.sh-orn i:last-child{background:linear-gradient(90deg,var(--gold-soft),transparent)}
+#sheet.on .sh-body p{animation:fadeUp .7s .25s both}
+
+#lightbox{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:18px}
+#lightbox.on{display:flex}
+#lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 0 50px rgba(225,188,124,.2)}
+</style>
+</head>
+<body class="locked">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21s-8.5-5.3-8.5-11.2C3.5 6.6 5.8 4.5 8.4 4.5c1.6 0 2.9.8 3.6 2 .7-1.2 2-2 3.6-2 2.6 0 4.9 2.1 4.9 5.3C20.5 15.7 12 21 12 21z"/></symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path d="M12 0c.6 6.5 4.9 10.8 12 12-7.1 1.2-11.4 5.5-12 12-.6-6.5-4.9-10.8-12-12C7.1 10.8 11.4 6.5 12 0z"/></symbol>
+    <g id="divHalf">
+      <path d="M150 50H122" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M121 50C112 38 100 31 88 31C96 38 106 45 121 50Z" fill="currentColor"/>
+      <path d="M121 50C112 62 100 69 88 69C96 62 106 55 121 50Z" fill="currentColor"/>
+      <path d="M118 50C108 46 98 46 90 50C98 54 108 54 118 50Z" fill="currentColor"/>
+      <path d="M86 50C76 50 70 40 72 32C76 24 86 26 86 34" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M86 50C76 50 70 60 72 68C76 76 86 74 86 66" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M72 50C60 50 50 40 40 30C33 23 22 24 20 33C18 42 28 46 34 41" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M72 50C60 50 50 60 40 70C33 77 22 76 20 67C18 58 28 54 34 59" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M58 50H6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="4" cy="50" r="3.2" fill="currentColor"/>
+      <circle cx="56" cy="50" r="2.4" fill="currentColor"/>
+    </g>
+    <symbol id="divider" viewBox="0 0 300 100">
+      <use href="#divHalf"/>
+      <g transform="translate(300,0) scale(-1,1)"><use href="#divHalf"/></g>
+      <path fill-rule="evenodd" fill="currentColor" d="M150 14L184 50L150 86L116 50ZM150 31L166 50L150 69L134 50Z"/>
+      <path fill="currentColor" d="M150 41L158 50L150 59L142 50Z"/>
+      <circle cx="150" cy="7" r="3" fill="currentColor"/><circle cx="150" cy="93" r="3" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ ENVELOPE ============ -->
+<div id="envelope">
+  <canvas id="dust"></canvas>
+  <div class="ev-wrap">
+    <div class="ev-top">
+      <div class="ev-eyebrow">Hurmatli mehmon</div>
+      <div class="ev-guest" id="guestName">Aziz mehmon</div>
+      <div class="ev-line"><i></i><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><use href="#heart"/></svg><i></i></div>
+    </div>
+
+    <div class="env3d" id="env3d">
+      <div class="env-glow"></div>
+      <svg class="e-back" viewBox="0 0 300 210" aria-hidden="true">
+        <defs>
+          <linearGradient id="eb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5a0009"/><stop offset="1" stop-color="#220000"/></linearGradient>
+          <linearGradient id="ef" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6e000e"/><stop offset="1" stop-color="#2e0000"/></linearGradient>
+          <linearGradient id="efl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#830016"/><stop offset="1" stop-color="#360000"/></linearGradient>
+        </defs>
+        <rect x="1" y="1" width="298" height="208" rx="8" fill="url(#eb)" stroke="#e1bc7c" stroke-width="1.2"/>
+      </svg>
+      <div class="e-letter">
+        <div class="lt-eyebrow">Nikoh to'yi</div>
+        <div class="lt-names">Mirsaid<em>&amp;</em>Maftuna</div>
+        <div class="lt-date" id="envDate">17 oktabr, 2026</div>
+      </div>
+      <svg class="e-front" viewBox="0 0 300 210" aria-hidden="true">
+        <path d="M1 1L150 122L299 1V202Q299 209 292 209H8Q1 209 1 202Z" fill="url(#ef)" stroke="#e1bc7c" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M1 209L118 110M299 209L182 110" fill="none" stroke="#e1bc7c" stroke-opacity=".28"/>
+      </svg>
+      <svg class="e-flap" viewBox="0 0 300 124" aria-hidden="true">
+        <path d="M1 1H299L150 122Z" fill="url(#efl)" stroke="#e1bc7c" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M26 9H274L150 105Z" fill="none" stroke="#e1bc7c" stroke-opacity=".3"/>
+      </svg>
+      <button class="e-seal" id="sealBtn" aria-label="Taklifnomani ochish"><svg viewBox="0 0 24 24"><use href="#heart"/></svg></button>
+      <div class="burst" id="burst"></div>
+    </div>
+
+    <div class="ev-bottom">
+      <div class="ev-msg">Sizni to'yimizga taklif qilamiz</div>
+      <button class="btn-gold shine" id="openBtn" disabled>Taklifnomani ochish</button>
+      <div class="load" id="load"><div class="bar"><i id="loadBar"></i></div><small id="loadTxt">Yuklanmoqda… 0%</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN ============ -->
+<div id="app">
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="spark" style="left:14%;top:12%;width:11px;animation-delay:.4s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
+    <span class="spark" style="right:12%;top:18%;width:8px;animation-delay:1.6s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
+    <img class="hero-flower" src="images/flower.webp" alt="" aria-hidden="true">
+    <div class="eyebrow">Bizning to'yimiz</div>
+    <span class="script n a">Mirsaid</span>
+    <span class="amp">&amp;</span>
+    <span class="script n b">Maftuna</span>
+    <svg class="gorn hero-divider" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
+    <figure class="arch hero-photo" data-full="photos/rings.jpg">
+      <svg class="gorn arch-orn" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
+      <div class="arch-ring"><div class="arch-in"><img src="photos/rings.jpg" alt="Nikoh uzuklari" width="736" height="920"></div></div>
+      <i class="arch-gem"></i>
+    </figure>
+    <br>
+    <svg class="scroll-hint" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg>
+  </header>
+
+  <!-- FRAME -->
+  <main class="frame">
+    <div class="frame-inner">
+
+      <!-- Nikoh to'yi haqida -->
+      <section class="sec" style="margin-top:-10px">
+        <h2 class="title rv">Nikoh to'yi haqida</h2>
+        <div class="two-col rv">
+          <div>
+            <h4>Kuyovning ota-onasi</h4>
+            <p>Rustamov Muxammatjon</p>
+            <p>Abdurahimova Muharramxon</p>
+          </div>
+          <div>
+            <h4>Kelinning ota-onasi</h4>
+            <p>Burxanov Baxtiyor</p>
+            <p>Burxanova Zamiraxon</p>
+          </div>
+        </div>
+        <p class="announce rv">Farzandlarimiz Mirsaid va Maftunaning<br>nikoh to'yi bo'lib o'tishini mamnuniyat bilan ma'lum qilamiz.<br>Ushbu quvonchli kunimizda sizni ham ko'rishni istardik.</p>
+      </section>
+
+      <svg class="gorn fdiv rv" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
+
+      <!-- Sana -->
+      <section class="sec" style="margin-top:0">
+        <h2 class="title rv">Mirsaid &amp; Maftuna</h2>
+        <div class="ceremony center rv">
+          <div class="datebar"><span>Shanba</span><b>17</b><span>Oktabr</span></div>
+          <div class="year">2026</div>
+        </div>
+      </section>
+
+      <!-- Lahzalar -->
+      <section class="sec">
+        <h2 class="title rv">Baxtli lahzalar</h2>
+        <div class="story">
+          <figure class="photo-frame p1 rv" data-full="photos/couple-1.jpg">
+            <img class="fc tl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc tr" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc bl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc br" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <div class="photo-in port"><img src="photos/couple-1.jpg" alt="Kelin va kuyov"></div>
+          </figure>
+          <figure class="photo-frame p2 rv" data-full="photos/couple-2.jpg">
+            <img class="fc tl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc tr" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc bl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc br" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <div class="photo-in land"><img src="photos/couple-2.jpg" alt="Kelin va kuyov"></div>
+            <span class="story-heart"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg></span>
+          </figure>
+        </div>
+        <p class="story-cap rv">Ikki yurak — bir taqdir.<br>Hayotimizning yangi sahifasini siz bilan boshlamoqchimiz.</p>
+      </section>
+
+      <svg class="gorn fdiv rv" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
+
+      <!-- Hisoblagich + taqvim -->
+      <section class="sec">
+        <h2 class="title rv">To'yga qolgan vaqt</h2>
+        <div class="cd rv" id="count">
+          <div><b id="cdD">0</b><small>kun</small></div>
+          <div><b id="cdH">0</b><small>soat</small></div>
+          <div><b id="cdM">0</b><small>daqiqa</small></div>
+          <div><b id="cdS">0</b><small>soniya</small></div>
+        </div>
+
+        <div class="cal rv">
+          <div class="mh">Oktabr 2026</div>
+          <div class="dow"><span>Du</span><span>Se</span><span>Ch</span><span>Pa</span><span>Ju</span><span>Sh</span><span>Ya</span></div>
+          <div class="days" id="days"></div>
+        </div>
+        <a class="linkbtn rv" id="addCal" href="#">Taqvimga qo'shish</a>
+        <button class="btn-gold sm center-btn rv" id="rsvpBtn">Ishtirokni tasdiqlash</button>
+        <p class="rsvp-note rv">Tugmani bosib, to'yga kelishingizni tasdiqlang</p>
+      </section>
+    </div>
+  </main>
+
+  <!-- VENUE -->
+  <section class="sec venue-sec" style="margin-top:20px">
+    <h2 class="title rv">To'y marosimi manzili</h2>
+    <p class="rv" style="margin-top:14px">«Start» to'yxonasi<br>Namangan viloyati, Uchqo'rg'on tumani</p>
+
+    <figure class="photo-frame rv" data-full="photos/venue.jpg">
+      <img class="fc tl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+      <img class="fc tr" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+      <img class="fc bl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+      <img class="fc br" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+      <div class="photo-in"><img src="photos/venue.jpg" alt="«Start» to'yxonasi binosi"></div>
+    </figure>
+
+    <div class="hr" style="margin-top:26px"></div>
+    <div class="map-frame rv">
+      <img class="fc tl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+      <img class="fc tr" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+      <img class="fc bl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+      <img class="fc br" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+      <div class="map">
+        <iframe referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=41.1214,72.0936&z=13&output=embed" title="Xarita"></iframe>
+      </div>
+    </div>
+    <a class="route rv" style="margin-top:22px" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Namangan%20viloyati%2C%20Uchqo%27rg%27on%2C%20Start%20to%27yxonasi">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+      Yo'nalishni ko'rish
+    </a>
+    <p class="rv" style="margin-top:10px;font-size:12px;color:#a58a58">Xaritadagi nuqta taxminiy — aniq yo'nalish uchun yuqoridagi tugmadan foydalaning</p>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="sec" style="margin-top:54px">
+    <h2 class="title rv">To'y kuni dasturi</h2>
+    <div class="sched rv" id="sched" style="margin-top:26px"></div>
+  </section>
+
+  <!-- WISHES -->
+  <section class="sec" style="margin-top:54px">
+    <h2 class="title rv">Tilak qoldiring</h2>
+    <form class="wish-form rv" id="wishForm">
+      <input id="wName" placeholder="Ismingiz*" maxlength="60" required autocomplete="name">
+      <textarea id="wText" placeholder="Yosh juftlikka tilagingizni yozing*" maxlength="500" required></textarea>
+      <input class="hp" id="wWeb" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="right"><button class="btn-gold sm" type="submit">Yuborish</button></div>
+    </form>
+    <p class="wish-ok" id="wishOk"></p>
+    <h3 class="wish-head rv" id="wishHead" hidden>Mehmonlar tilaklari</h3>
+    <div class="wishes" id="wishes"></div>
+  </section>
+
+  <!-- GIFT -->
+  <section class="sec" style="margin-top:58px">
+    <h2 class="title rv">Tilak qutisi</h2>
+    <div class="gift-stage rv" id="gift" role="button" tabindex="0" aria-label="Sovg'a qutisini ochish">
+      <div class="gift-rays"></div>
+      <div class="gift-glow"></div>
+      <div class="gift-shadow"></div>
+
+      <span class="sp" style="left:60px;top:40px;--d:0s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
+      <span class="sp s2" style="right:56px;top:62px;--d:1.2s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
+      <span class="sp s3" style="left:30px;top:180px;--d:2.1s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
+      <span class="sp s3" style="right:22px;top:20px;--d:.6s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
+      <span class="sp s2" style="right:30px;top:230px;--d:1.7s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
+      <span class="sp" style="left:150px;top:6px;--d:2.6s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
+
+      <img class="mini" src="images/mini/elegant_leaf_green.webp" alt="" style="left:26px;top:34px;width:46px;--dur:4.2s;--rot:-14deg;--bx:-34px;--by:-46px">
+      <img class="mini" src="images/mini/lien_hoa_v2_green.webp" alt="" style="right:24px;top:10px;width:54px;--dur:5s;--dl:.8s;--rot:14deg;--bx:34px;--by:-50px">
+      <img class="mini" src="images/mini/silk_ribbon_green.webp" alt="" style="left:6px;top:132px;width:36px;--dur:3.8s;--dl:1.4s;--rot:-8deg;--bx:-46px;--by:-10px">
+      <img class="mini" src="images/mini/minimalism_red.webp" alt="" style="right:8px;top:138px;width:36px;--dur:4.6s;--dl:.3s;--rot:10deg;--bx:46px;--by:-14px">
+      <img class="mini" src="images/mini/baroque_gold.webp" alt="" style="left:112px;top:0;width:30px;--dur:4s;--dl:1.1s;--rot:6deg;--bx:-10px;--by:-44px">
+
+      <div class="gift-wrap"><img class="gift-box" src="images/royal_red.webp" alt="Sovg'a qutisi"><div class="gift-shine"></div></div>
+
+      <img class="mini front" src="images/mini/double_dragon_blue.webp" alt="" style="left:30px;top:226px;width:58px;--dur:4.4s;--dl:1s;--rot:-4deg;--bx:-40px;--by:26px">
+      <img class="mini front" src="images/mini/glass_garden_green.webp" alt="" style="left:88px;top:250px;width:40px;--dur:3.6s;--dl:1.8s;--rot:8deg;--bx:-16px;--by:40px">
+      <img class="mini front" src="images/mini/elegant_leaf_green.webp" alt="" style="right:54px;top:236px;width:52px;--dur:5.2s;--dl:.5s;--rot:-6deg;--bx:30px;--by:32px">
+      <img class="mini front" src="images/mini/minimalism_red.webp" alt="" style="right:14px;top:212px;width:34px;--dur:3.9s;--dl:2.2s;--rot:12deg;--bx:48px;--by:16px">
+
+      <div class="flash"></div>
+      <i class="ring"></i><i class="ring r2"></i>
+      <div class="burstbox" id="burstbox"></div>
+    </div>
+    <div class="tap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.6 14.6a1.5 1.5 0 0 1 2.4-1.8L9 15.5"/></svg>Ochish uchun bosing</div>
+    <p class="thanks rv" style="margin-top:34px;text-align:center;font-size:16px;color:var(--gold);padding:0 24px">Sizning tashrifingiz biz uchun eng qimmatli sovg'a bo'ladi!</p>
+  </section>
+
+  <div class="foot">♡ Mirsaid &amp; Maftuna · 17.10.2026</div>
+
+  <div class="sign rv">
+    <div class="orn"><i></i><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg><i></i></div>
+    <small>Digital Invitation by</small>
+    <a class="tg" href="https://t.me/Abduqodir_Fotih" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M21 3L3 10.6l6.2 2.4L11.6 20l3.1-4.2L19 19.5 21 3z"/><path d="M9.2 13l11.8-10"/></svg>
+      @Abduqodir_Fotih
+    </a>
+  </div>
+</div>
+
+<!-- Modal (RSVP) -->
+<div id="modal">
+  <div class="m-box">
+    <h3>Ishtirokingizni tasdiqlang</h3>
+    <p id="mText">Iltimos, to'yga kelasizmi yoki yo'qmi, bildiring.</p>
+    <input id="rName" placeholder="Ismingiz*" maxlength="60" autocomplete="name">
+    <select id="rGuests" aria-label="Necha kishi kelasiz">
+      <option value="1">1 kishi</option><option value="2">2 kishi</option><option value="3">3 kishi</option>
+      <option value="4">4 kishi</option><option value="5">5 kishi</option><option value="6">6 kishi</option>
+    </select>
+    <input id="rNote" placeholder="Izoh (ixtiyoriy)" maxlength="200">
+    <input class="hp" id="rWeb" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="m-opts">
+      <button class="btn-gold sm" data-r="yes">Albatta kelaman</button>
+      <button class="btn-gold sm" data-r="no" style="background:rgba(255,255,255,.1);color:var(--gold);box-shadow:none;border:1px solid var(--line)">Kela olmayman</button>
+    </div>
+    <button class="m-close" id="mClose">Yopish</button>
+  </div>
+</div>
+
+<div id="sheetBack"></div>
+<div id="sheet" role="dialog" aria-label="Tilak">
+  <div class="sh-head"><span>Tilak qutisi</span><button id="sheetX" aria-label="Yopish">&times;</button></div>
+  <div class="sh-body">
+    <img class="sh-icon" src="images/royal_red.webp" alt="">
+    <p id="sheetText">…</p>
+    <div class="sh-orn"><i></i><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><use href="#heart"/></svg><i></i></div>
+    <button class="btn-gold sm" id="sheetOk">Rahmat!</button>
+  </div>
+</div>
+<div id="lightbox"><img alt=""></div>
+<audio id="bgMusic" loop preload="auto" src="music/toy.mp3"></audio>
+<button id="music" aria-label="Musiqa" aria-pressed="false" title="Musiqa">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2b0001" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5" fill="#2b0001"/><circle cx="16.5" cy="16" r="2.5" fill="#2b0001"/><path class="mute" d="M3 3l18 18" stroke-width="2.2"/></svg>
+</button>
+
+<script>
+/* ==================== SOZLAMALAR (o'zgartirish oson) ==================== */
+const CFG = {
+  groom: "Mirsaid",
+  bride: "Maftuna",
+  nikoh: { y: 2026, m: 10, d: 17, time: "09:00" },
+  venue: "«Start» to'yxonasi, Namangan viloyati, Uchqo'rg'on tumani",
+  schedule: [
+    ["06:30","Nahorgi osh","bomdod namozidan keyin"],
+    ["09:00","Nikoh (ZAGS)",""],
+    ["15:00","Kuyov navkari","«Start» to'yxonasida"]
+  ],
+  wishes: [
+    "Yangi oilaga baxt, sog'lik va mustahkam sevgi tilaymiz!",
+    "Hayotingiz gulzor, oilangiz totuv, dasturxoningiz to'kin bo'lsin!",
+    "Bir-biringizga suyanch va do'st bo'lib, umr bo'yi baxtli yashang!",
+    "Xonadoningiz fayz va barakaga to'lsin, ro'zg'oringiz butun bo'lsin!",
+    "Ikki yurak bir umrga birlashdi. Mehr-oqibat doim yo'ldoshingiz bo'lsin!",
+    "Sevgingiz yildan-yilga ziyoda bo'lsin, qiyinchiliklar sizni chetlab o'tsin!",
+    "Oq yo'l, yosh oila! Har kuningiz bayramdek shodlikka to'la bo'lsin!"
+  ]
+};
+
+/* ==================== yordamchi ==================== */
+const $ = s => document.querySelector(s);
+const MONTHS = ["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr"];
+const WEEK = ["Yakshanba","Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba"];
+const pad = n => String(n).padStart(2,"0");
+const esc = s => s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* mehmon ismi: ?name=Ali yoki ?mehmon=Ali */
+(function(){
+  const q = new URLSearchParams(location.search);
+  const n = q.get("name") || q.get("mehmon");
+  if (n) $("#guestName").textContent = n.slice(0,40);
+})();
+
+$("#envDate").textContent = `${CFG.nikoh.d} ${MONTHS[CFG.nikoh.m-1].toLowerCase()}, ${CFG.nikoh.y}`;
+
+/* ==================== oldindan yuklash ==================== */
+/* Zarf ochilishidan oldin rasm, shrift va musiqa to'liq yuklab olinadi — sekin internetda ham hech narsa "tushib qolmaydi". */
+const Preload = (()=>{
+  const btn = $("#openBtn"), bar = $("#loadBar"), label = $("#loadTxt"), box = $("#load");
+  let ready = false, done = 0, total = 0, musicPart = 0;
+  const MUSIC_W = 6;
+  const keep = [];
+  function paint(){
+    const pct = Math.min(100, Math.round((done + musicPart*MUSIC_W) / total * 100));
+    bar.style.width = pct + "%"; label.textContent = "Yuklanmoqda… " + pct + "%";
+  }
+  function finish(){
+    if(ready) return; ready = true;
+    bar.style.width = "100%"; label.textContent = "Tayyor";
+    btn.disabled = false; setTimeout(()=>box.classList.add("ok"), 400);
+  }
+  function step(){ done++; paint(); if(done + MUSIC_W >= total && musicPart >= 1) finish(); }
+
+  const imgs = new Set(["images/background.webp"]);
+  document.querySelectorAll("img[src]").forEach(i=>imgs.add(i.getAttribute("src")));
+  const fonts = ['400 20px "EB Garamond"','700 20px "EB Garamond"','400 20px "Lora"','400 20px "Pattaya"'];
+  total = imgs.size + fonts.length + MUSIC_W;
+  paint();
+
+  imgs.forEach(src=>{
+    const im = new Image(); keep.push(im);
+    im.onload = ()=>{ (im.decode ? im.decode() : Promise.resolve()).catch(()=>{}).then(step); };
+    im.onerror = step;
+    im.src = src;
+  });
+  fonts.forEach(f=>{ (document.fonts && document.fonts.load ? document.fonts.load(f) : Promise.resolve()).catch(()=>{}).then(step); });
+
+  const audio = $("#bgMusic");
+  (async ()=>{
+    try{
+      const r = await fetch(audio.getAttribute("src"));
+      if(!r.ok || !r.body) throw 0;
+      const len = +r.headers.get("Content-Length") || 0, reader = r.body.getReader(), parts = [];
+      let got = 0;
+      for(;;){
+        const {done:end, value} = await reader.read();
+        if(end) break;
+        parts.push(value); got += value.length;
+        if(len){ musicPart = got/len; paint(); }
+      }
+      audio.src = URL.createObjectURL(new Blob(parts, {type:"audio/mpeg"}));
+    }catch(e){ audio.preload = "auto"; }
+    musicPart = 1; paint();
+    if(done + MUSIC_W >= total) finish();
+  })();
+
+  setTimeout(finish, 20000); // juda sekin internetda ham 20 soniyadan keyin ochishga ruxsat
+  return { get ready(){ return ready; } };
+})();
+
+/* ==================== konvert ==================== */
+(function(){
+  const cv = $("#dust"), cx = cv.getContext("2d");
+  let W = 0, H = 0, boost = 1, run = true, raf = 0;
+  const DPR = Math.min(1.5, window.devicePixelRatio || 1), ps = [];
+  function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W*DPR; cv.height = H*DPR; cx.setTransform(DPR,0,0,DPR,0,0); }
+  size(); window.addEventListener("resize", size);
+  const N = W < 500 ? 55 : 95;
+  for(let i=0;i<N;i++) ps.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.7+.5, v:Math.random()*.35+.08, a:Math.random()*6.28, s:Math.random()*.02+.006, sw:Math.random()*.6+.2, big:i%9===0 });
+  function frame(){
+    if(!run) return;
+    cx.clearRect(0,0,W,H);
+    boost += (1-boost)*.02;
+    for(const p of ps){
+      p.y -= p.v*boost; p.a += p.s; p.x += Math.sin(p.a)*p.sw*.5;
+      if(p.y < -20){ p.y = H+20; p.x = Math.random()*W; }
+      const tw = .5+.5*Math.sin(p.a*3);
+      if(p.big){
+        const g = cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*12);
+        g.addColorStop(0,"rgba(225,188,124,.16)"); g.addColorStop(1,"rgba(225,188,124,0)");
+        cx.fillStyle = g; cx.beginPath(); cx.arc(p.x,p.y,p.r*12,0,6.28); cx.fill();
+      } else {
+        cx.globalAlpha = .18 + .7*tw; cx.fillStyle = "#f0cd8c";
+        cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.28); cx.fill(); cx.globalAlpha = 1;
+      }
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  frame();
+
+  const env = $("#envelope"), reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let opened = false;
+  function burst(){
+    const b = $("#burst"), col = ["#f8e0a6","#e1bc7c","#ffffff","#c9974f"];
+    for(let i=0;i<26;i++){
+      const e = document.createElement("i"), ang = Math.random()*6.28, d = 70+Math.random()*130, sz = 3+Math.random()*5;
+      e.style.setProperty("--dx", Math.cos(ang)*d+"px"); e.style.setProperty("--dy", Math.sin(ang)*d+"px");
+      e.style.width = e.style.height = sz+"px"; e.style.background = col[i%4]; e.style.animationDelay = Math.random()*.18+"s";
+      b.appendChild(e);
+    }
+  }
+  function finish(){
+    env.classList.add("done"); document.body.classList.add("go"); observe();
+    setTimeout(()=>{ run = false; cancelAnimationFrame(raf); }, 1300);
+  }
+  function open(){
+    if(opened || !Preload.ready) return; opened = true;
+    Music.start();
+    if(reduce){ document.body.classList.remove("locked"); window.scrollTo(0,0); finish(); return; }
+    env.classList.add("opening"); burst(); boost = 4;
+    setTimeout(()=>env.classList.add("lift"), 1900);
+    setTimeout(()=>{ env.classList.add("zoom"); document.body.classList.remove("locked"); window.scrollTo(0,0); }, 2800);
+    setTimeout(finish, 3000);
+  }
+  $("#openBtn").addEventListener("click", open);
+  $("#env3d").addEventListener("click", open);
+  if (new URLSearchParams(location.search).get("autoopen")) { const w = setInterval(()=>{ if(Preload.ready){ clearInterval(w); open(); } }, 100); }
+})();
+
+/* ==================== sanoq ==================== */
+(function(){
+  const t = new Date(CFG.nikoh.y, CFG.nikoh.m-1, CFG.nikoh.d, ...CFG.nikoh.time.split(":").map(Number));
+  const box = $("#count"), d = $("#cdD"), h = $("#cdH"), m = $("#cdM"), sc = $("#cdS");
+  let iv;
+  function tick(){
+    let s = Math.floor((t - Date.now())/1000);
+    if (s <= 0){ box.innerHTML = '<div class="cd-done">To\'y kuni keldi!</div>'; clearInterval(iv); return; }
+    d.textContent = Math.floor(s/86400); s %= 86400;
+    h.textContent = Math.floor(s/3600);  s %= 3600;
+    m.textContent = Math.floor(s/60);    s %= 60;
+    sc.textContent = s;
+  }
+  tick(); iv = setInterval(tick,1000);
+})();
+
+/* ==================== kalendar ==================== */
+(function(){
+  const {y,m,d} = CFG.nikoh;
+  const first = (new Date(y,m-1,1).getDay()+6)%7;
+  const len = new Date(y,m,0).getDate();
+  let h = "";
+  for(let i=0;i<first;i++) h += "<span></span>";
+  for(let i=1;i<=len;i++){
+    h += i===d
+      ? `<span class="hit"><svg viewBox="0 0 24 24"><use href="#heart"/></svg><b>${i}</b></span>`
+      : `<span>${i}</span>`;
+  }
+  $("#days").innerHTML = h;
+})();
+
+/* kalendarga qo'shish (.ics) */
+$("#addCal").addEventListener("click", e=>{
+  e.preventDefault();
+  const {y,m,d,time} = CFG.nikoh, [hh,mm] = time.split(":").map(Number);
+  const f = (H,M)=>`${y}${pad(m)}${pad(d)}T${pad(H)}${pad(M)}00`;
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Toy//UZ","BEGIN:VEVENT",
+    `UID:toy-${y}${pad(m)}${pad(d)}@taklifnoma`,`DTSTAMP:${f(0,0)}Z`.replace("Z",""),
+    `DTSTART:${f(hh,mm)}`,`DTEND:${f(hh+12,mm)}`,
+    `SUMMARY:${CFG.groom} & ${CFG.bride} to'yi`,`LOCATION:${CFG.venue}`,
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics],{type:"text/calendar"}));
+  a.download = "toy.ics"; a.click();
+});
+
+/* ==================== dastur ==================== */
+$("#sched").innerHTML = CFG.schedule.map(([t,e,n])=>
+  `<div class="row"><span class="tm">${t}</span><span class="dt"></span><span class="ev">${esc(e)}${n?`<small>${esc(n)}</small>`:""}</span></div>`).join("");
+
+/* ==================== tilaklar ==================== */
+(function(){
+  const form = $("#wishForm"), ok = $("#wishOk"), btn = form.querySelector("button");
+  const list = $("#wishes"), head = $("#wishHead");
+  const g = $("#guestName").textContent;
+  if (g !== "Aziz mehmon") $("#wName").value = g;
+
+  function card(w){
+    const d = new Date(w.t);
+    const p2 = n => String(n).padStart(2,"0");
+    const when = isNaN(d) ? "" : `${p2(d.getDate())}.${p2(d.getMonth()+1)}.${d.getFullYear()} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
+    return `<div class="wish"><div class="h"><b>${esc(w.n)}</b><span>${when}</span></div><p>${esc(w.m)}</p></div>`;
+  }
+  function show(items){
+    head.hidden = !items.length;
+    list.innerHTML = items.map(card).join("");
+  }
+  let items = [];
+  fetch("/api/wish", { cache: "no-store" })
+    .then(r => r.json())
+    .then(j => { if (j && j.ok) { items = j.wishes || []; show(items); } })
+    .catch(()=>{});
+
+  form.addEventListener("submit", async e=>{
+    e.preventDefault();
+    const name = $("#wName").value.trim(), text = $("#wText").value.trim();
+    if(!name || !text) return;
+    btn.disabled = true; btn.textContent = "Yuborilmoqda…"; ok.textContent = "";
+    try{
+      const r = await fetch("/api/wish", {
+        method: "POST", headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ name, text, website: $("#wWeb").value })
+      });
+      const j = await r.json().catch(()=>({}));
+      if(!r.ok || !j.ok) throw new Error("fail");
+      items.unshift(j.wish || { n:name, m:text, t:Date.now() });
+      show(items);
+      ok.textContent = "Rahmat! Tilagingiz qo'shildi ♡";
+      $("#wText").value = "";
+    }catch(err){
+      ok.textContent = "Yuborib bo'lmadi. Iltimos, birozdan so'ng qayta urinib ko'ring.";
+    }finally{
+      btn.disabled = false; btn.textContent = "Yuborish";
+    }
+  });
+})();
+
+/* ==================== sovg'a qutisi ==================== */
+(function(){
+  const stage = $("#gift"), sheet = $("#sheet"), back = $("#sheetBack"), txt = $("#sheetText"), bb = $("#burstbox");
+  const list = CFG.wishes;
+  let order = [], last = -1, busy = false;
+  const COLORS = ["#e1bc7c","#f6e2b0","#e77373","#9fd3a9","#ffffff","#c9bdea","#f0c46a","#ff9eb0"];
+  const rnd = (a,b)=>a+Math.random()*(b-a);
+  function particles(){
+    bb.innerHTML = "";
+    const frag = document.createDocumentFragment();
+    for(let i=0;i<46;i++){
+      const e = document.createElement("i");
+      const kind = i<30 ? "c" : i<38 ? "h" : "s";
+      e.className = kind;
+      const ang = rnd(-Math.PI*.95, -Math.PI*.05) + (i%5===0 ? Math.PI*.5 : 0);
+      const d = rnd(90, 210);
+      e.style.setProperty("--x", Math.cos(ang)*d+"px");
+      e.style.setProperty("--y", (Math.sin(ang)*d + (kind==="c"?rnd(30,90):-rnd(10,40)))+"px");
+      e.style.setProperty("--r", rnd(-720,720)+"deg");
+      e.style.setProperty("--t", (kind==="h"?rnd(1.6,2.2):rnd(1.1,1.7))+"s");
+      e.style.setProperty("--dl", rnd(0,.15)+"s");
+      if(kind==="c"){ e.style.background = COLORS[i%COLORS.length]; if(i%3===0) e.style.borderRadius="50%"; }
+      else e.innerHTML = `<svg viewBox="0 0 24 24"><use href="#${kind==="h"?"heart":"star"}"/></svg>`;
+      frag.appendChild(e);
+    }
+    bb.appendChild(frag);
+  }
+  function shuffle(){
+    order = list.map((_,i)=>i);
+    for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+    if (order[0]===last && order.length>1) order.push(order.shift());
+  }
+  function next(){ if(!order.length) shuffle(); last = order.shift(); return list[last]; }
+  function open(){
+    if(busy) return; busy = true;
+    txt.textContent = next();
+    if(navigator.vibrate) try{ navigator.vibrate([30,40,60]); }catch{}
+    stage.classList.remove("pop","shake"); void stage.offsetWidth;
+    stage.classList.add("shake");
+    setTimeout(()=>{ stage.classList.remove("shake"); void stage.offsetWidth; stage.classList.add("pop"); particles(); }, 480);
+    setTimeout(()=>{ sheet.classList.add("on"); back.classList.add("on"); }, 1350);
+    setTimeout(()=>{ stage.classList.remove("pop"); busy = false; }, 2300);
+  }
+  function close(){ sheet.classList.remove("on"); back.classList.remove("on"); }
+  stage.addEventListener("click", open);
+  stage.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); open(); }});
+  back.addEventListener("click", close);
+  $("#sheetX").addEventListener("click", close);
+  $("#sheetOk").addEventListener("click", close);
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape") close(); });
+})();
+
+/* ==================== musiqa ==================== */
+const Music = (()=>{
+  const btn = $("#music"), audio = $("#bgMusic");
+  let started = false, on = false;
+  audio.volume = .85;
+  function setOn(v){ on = v; btn.classList.toggle("playing",v); btn.setAttribute("aria-pressed",v?"true":"false"); }
+  btn.addEventListener("click", ()=>{
+    if(!started) return;
+    if(on){ audio.pause(); setOn(false); } else { audio.play().catch(()=>{}); setOn(true); }
+  });
+  document.addEventListener("visibilitychange", ()=>{
+    if(!started) return;
+    if(document.hidden){ if(on) audio.pause(); } else { if(on) audio.play().catch(()=>{}); }
+  });
+  return { start(){
+    btn.classList.add("show");
+    if(started) return;
+    started = true;
+    audio.play().then(()=>setOn(true)).catch(()=>setOn(false));
+  }};
+})();
+
+/* ==================== RSVP ==================== */
+(function(){
+  const m = $("#modal"), txt = $("#mText"), btns = m.querySelectorAll("[data-r]");
+  const ASK = "Iltimos, to'yga kelasizmi yoki yo'qmi, bildiring.";
+  let sending = false;
+  $("#rsvpBtn").addEventListener("click", ()=>{
+    const g = $("#guestName").textContent;
+    $("#rName").value = g === "Aziz mehmon" ? "" : g;
+    txt.textContent = ASK;
+    m.classList.add("on");
+  });
+  $("#mClose").addEventListener("click", ()=> m.classList.remove("on"));
+  m.addEventListener("click", e=>{ if(e.target===m) m.classList.remove("on"); });
+  btns.forEach(b=>b.addEventListener("click", async ()=>{
+    if(sending) return;
+    const name = $("#rName").value.trim();
+    if(!name){ txt.textContent = "Iltimos, ismingizni yozing."; $("#rName").focus(); return; }
+    sending = true; btns.forEach(x=>x.disabled = true);
+    txt.textContent = "Yuborilmoqda…";
+    try{
+      const r = await fetch("/api/rsvp", {
+        method: "POST", headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ name, answer: b.dataset.r, guests: $("#rGuests").value, note: $("#rNote").value.trim(), website: $("#rWeb").value })
+      });
+      const j = await r.json().catch(()=>({}));
+      if(!r.ok || !j.ok) throw new Error(j.error || "fail");
+      txt.textContent = b.dataset.r==="yes" ? "Rahmat! Sizni kutib qolamiz ♡" : "Xabaringiz uchun rahmat. Sizni sog'inib qolamiz.";
+      try{ localStorage.setItem("toy_rsvp_done", b.dataset.r); }catch{}
+      setTimeout(()=> m.classList.remove("on"), 2200);
+    }catch(e){
+      txt.textContent = "Yuborib bo'lmadi. Iltimos, birozdan so'ng qayta urinib ko'ring.";
+    }finally{
+      sending = false; btns.forEach(x=>x.disabled = false);
+    }
+  }));
+})();
+
+/* ==================== rasm kattalashtirish ==================== */
+(function(){
+  const lb = $("#lightbox"), im = lb.querySelector("img");
+  document.querySelectorAll("[data-full]").forEach(f=>f.addEventListener("click", ()=>{
+    im.src = f.dataset.full; lb.classList.add("on");
+  }));
+  lb.addEventListener("click", ()=> lb.classList.remove("on"));
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape") lb.classList.remove("on"); });
+})();
+
+/* ==================== scroll animatsiya ==================== */
+function observe(){
+  const io = new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+  }),{threshold:.12});
+  document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+}
+</script>
+</body>
+</html>
