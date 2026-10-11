@@ -423,6 +423,96 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 #lightbox{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:18px}
 #lightbox.on{display:flex}
 #lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 0 50px rgba(225,188,124,.2)}
+
+/* ================= QO'SHIMCHA ANIMATSIYALAR ================= */
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+
+/* gulli naqsh: gullab ochilish + tebranish + oltin nur */
+.flower-wrap{position:relative;width:min(360px,92%);margin:0 auto 6px;opacity:0}
+.flower-wrap .hero-flower{width:100%;margin:0;opacity:1;animation:none}
+body.go .flower-wrap{animation:bloom 2s .05s cubic-bezier(.2,.8,.2,1) both}
+body.go .flower-wrap .hero-flower{transform-origin:50% 100%;animation:sway 7s 2s ease-in-out infinite}
+@keyframes bloom{0%{opacity:0;transform:scale(.55) translateY(20px);filter:blur(10px)}60%{opacity:1;filter:blur(0)}100%{opacity:1;transform:none}}
+@keyframes sway{0%,100%{rotate:0deg;scale:1}50%{rotate:1.2deg;scale:1.025}}
+.flower-shine{position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  -webkit-mask:url(images/flower.webp) center/contain no-repeat;mask:url(images/flower.webp) center/contain no-repeat}
+.flower-shine::after{content:"";position:absolute;top:-10%;left:-50%;width:35%;height:120%;
+  background:linear-gradient(100deg,transparent,rgba(255,246,214,.95),transparent);transform:skewX(-20deg);animation:sweep 5s 2.6s ease-in-out infinite}
+.flower-glow{position:absolute;left:50%;top:55%;width:80%;height:70%;translate:-50% -50%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(225,188,124,.22),transparent 70%);animation:glowPulse 5s ease-in-out infinite}
+
+/* sahifa bo'ylab zarrachalar */
+#petals{position:fixed;top:0;left:50%;translate:-50% 0;width:min(430px,100%);height:100vh;pointer-events:none;z-index:30}
+
+/* sarlavhalar */
+.title.rv{letter-spacing:.42em;filter:blur(5px)}
+.title.rv.in{letter-spacing:.1em;filter:none;transition:opacity 1s ease,transform 1s ease,letter-spacing 1.4s cubic-bezier(.2,.8,.2,1),filter 1.2s ease}
+
+/* ornamentlar markazdan chiziladi */
+.gorn.fdiv.rv{clip-path:inset(0 50% 0 50%);transform:none}
+.gorn.fdiv.rv.in{clip-path:inset(0 0 0 0);transition:clip-path 1.6s cubic-bezier(.6,0,.2,1),opacity .6s;animation:ornGlow 4s 1.6s ease-in-out infinite}
+body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-out infinite}
+@keyframes ornGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(225,188,124,.2))}50%{filter:drop-shadow(0 0 12px rgba(248,228,176,.75))}}
+
+/* ramka chetlari bo'ylab aylanuvchi yorug'lik */
+.photo-frame::before,.map-frame::before,.arch-ring::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:6px;pointer-events:none;z-index:1;
+  background:conic-gradient(from var(--ang),transparent 0 70%,rgba(255,250,230,.15) 76%,#fffbe8 84%,rgba(255,250,230,.15) 92%,transparent 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:edgeRun 4.5s linear infinite}
+.arch-ring::before{padding:7px}
+@keyframes edgeRun{to{--ang:360deg}}
+.photo-frame,.map-frame{background-size:250% 250%;animation:goldFlow 7s ease-in-out infinite}
+@keyframes goldFlow{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+.photo-frame .photo-in,.map-frame .map{position:relative;z-index:2}
+
+/* burchak ornamentlari uchib keladi */
+.rv .fc{opacity:0;scale:.2;rotate:-180deg;transition:opacity .8s .35s,scale 1s .35s cubic-bezier(.3,1.5,.5,1),rotate 1s .35s cubic-bezier(.3,1.2,.5,1)}
+.rv.in .fc{opacity:1;scale:1;rotate:0deg;animation:fcGlow 3s 1.5s ease-in-out infinite}
+.fc{z-index:3}
+@keyframes fcGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(0,0,0,.6))}50%{filter:drop-shadow(0 0 9px rgba(248,228,176,.9))}}
+
+/* rasm: fokus va yorqinlik bilan ochiladi */
+.rv .photo-in img{filter:blur(6px) brightness(.6)}
+.rv.in .photo-in img{filter:none;transition:transform 2.2s cubic-bezier(.2,.8,.2,1),filter 1.6s ease}
+.story .p1.rv{transform:translateX(-40px) rotate(-6deg)}
+.story .p2.rv{transform:translateX(40px) rotate(6deg)}
+.story .rv.in{transform:none}
+
+/* ota-onalar ikki tomondan */
+.two-col.rv>div:first-child{transform:translateX(-26px);opacity:0;transition:all 1s .15s ease}
+.two-col.rv>div:last-child{transform:translateX(26px);opacity:0;transition:all 1s .3s ease}
+.two-col.rv.in>div{transform:none;opacity:1}
+
+/* hisoblagich */
+.cd.rv>div{opacity:0;transform:translateY(20px) scale(.8)}
+.cd.rv.in>div{opacity:1;transform:none;transition:all .7s cubic-bezier(.3,1.4,.5,1)}
+.cd.rv.in>div:nth-child(2){transition-delay:.1s}.cd.rv.in>div:nth-child(3){transition-delay:.2s}.cd.rv.in>div:nth-child(4){transition-delay:.3s}
+.cd b.bump{animation:bump .45s ease}
+@keyframes bump{0%{transform:translateY(-6px);opacity:.3}100%{transform:none;opacity:1}}
+
+/* taqvimdagi yurak */
+.cal .days .hit svg{animation:beat 1.4s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(225,188,124,.7))}
+@keyframes beat{0%,100%{scale:1}15%{scale:1.22}30%{scale:1}45%{scale:1.14}}
+
+/* dastur chizig'i o'sadi */
+.sched.rv .row .dt::before{transform-origin:top;scale:1 0}
+.sched.rv .row .dt::after{scale:0}
+.sched.rv.in .row .dt::before{scale:1 1;transition:scale .5s ease}
+.sched.rv.in .row .dt::after{scale:1;transition:scale .5s cubic-bezier(.3,1.8,.5,1);box-shadow:0 0 10px rgba(248,228,176,.8)}
+.sched.rv .row .tm,.sched.rv .row .ev{opacity:0;transform:translateX(12px)}
+.sched.rv .row .tm{transform:translateX(-12px)}
+.sched.rv.in .row .tm,.sched.rv.in .row .ev{opacity:1;transform:none;transition:all .7s ease}
+.sched.rv.in .row:nth-child(2) *,.sched.rv.in .row:nth-child(2) .dt::before,.sched.rv.in .row:nth-child(2) .dt::after{transition-delay:.45s}
+.sched.rv.in .row:nth-child(3) *,.sched.rv.in .row:nth-child(3) .dt::before,.sched.rv.in .row:nth-child(3) .dt::after{transition-delay:.9s}
+.sched.rv.in .row:nth-child(4) *,.sched.rv.in .row:nth-child(4) .dt::before,.sched.rv.in .row:nth-child(4) .dt::after{transition-delay:1.35s}
+
+/* tugmalar porlashi */
+.btn-gold.sm.center-btn{animation:btnPulse 2.6s ease-in-out infinite}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 18px rgba(225,188,124,.35),0 4px 10px rgba(0,0,0,.4)}50%{box-shadow:0 0 34px rgba(248,228,176,.75),0 4px 10px rgba(0,0,0,.4)}}
+
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv,.rv *{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
 </style>
 </head>
 <body class="locked">
@@ -506,7 +596,11 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
   <header class="hero">
     <span class="spark" style="left:14%;top:12%;width:11px;animation-delay:.4s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
     <span class="spark" style="right:12%;top:18%;width:8px;animation-delay:1.6s"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg></span>
-    <img class="hero-flower" src="images/flower.webp" alt="" aria-hidden="true">
+    <div class="flower-wrap" aria-hidden="true">
+      <div class="flower-glow"></div>
+      <img class="hero-flower" src="images/flower.webp" alt="">
+      <div class="flower-shine"></div>
+    </div>
     <div class="eyebrow">Bizning to'yimiz</div>
     <span class="script n a">Mirsaid</span>
     <span class="amp">&amp;</span>
@@ -731,6 +825,7 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
   </div>
 </div>
 <div id="lightbox"><img alt=""></div>
+<canvas id="petals" aria-hidden="true"></canvas>
 <audio id="bgMusic" loop preload="auto" src="music/toy.mp3"></audio>
 <button id="music" aria-label="Musiqa" aria-pressed="false" title="Musiqa">
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2b0001" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5" fill="#2b0001"/><circle cx="16.5" cy="16" r="2.5" fill="#2b0001"/><path class="mute" d="M3 3l18 18" stroke-width="2.2"/></svg>
@@ -872,7 +967,7 @@ const Preload = (()=>{
     }
   }
   function finish(){
-    env.classList.add("done"); document.body.classList.add("go"); observe();
+    env.classList.add("done"); document.body.classList.add("go"); observe(); Petals.start();
     setTimeout(()=>{ run = false; cancelAnimationFrame(raf); }, 1300);
   }
   function open(){
@@ -901,6 +996,7 @@ const Preload = (()=>{
     h.textContent = Math.floor(s/3600);  s %= 3600;
     m.textContent = Math.floor(s/60);    s %= 60;
     sc.textContent = s;
+    sc.classList.remove("bump"); void sc.offsetWidth; sc.classList.add("bump");
   }
   tick(); iv = setInterval(tick,1000);
 })();
@@ -1105,6 +1201,54 @@ const Music = (()=>{
   }));
   lb.addEventListener("click", ()=> lb.classList.remove("on"));
   document.addEventListener("keydown", e=>{ if(e.key==="Escape") lb.classList.remove("on"); });
+})();
+
+/* ==================== suzuvchi gulbarglar va oltin zarrachalar ==================== */
+const Petals = (()=>{
+  const cv = $("#petals"), cx = cv.getContext("2d");
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DPR = Math.min(1.5, window.devicePixelRatio || 1);
+  let W = 0, H = 0, ps = [], raf = 0, on = false;
+  const COLS = ["#e1bc7c","#f3d59b","#c9974f","#b5383f","#8f1f2a"];
+  function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W*DPR; cv.height = H*DPR; cx.setTransform(DPR,0,0,DPR,0,0); }
+  function make(top){
+    const petal = Math.random() < .38;
+    return { x:Math.random()*W, y: top ? -20 - Math.random()*H : Math.random()*H, petal,
+      s: petal ? 5+Math.random()*5 : .8+Math.random()*1.6, vy: petal ? .35+Math.random()*.45 : .15+Math.random()*.3,
+      a:Math.random()*6.28, va:.01+Math.random()*.02, rot:Math.random()*6.28, vr:(Math.random()-.5)*.03,
+      sw:.4+Math.random()*.8, c: petal ? COLS[Math.floor(Math.random()*COLS.length)] : "#f3d59b" };
+  }
+  function frame(){
+    if(!on) return;
+    cx.clearRect(0,0,W,H);
+    for(const p of ps){
+      p.y += p.vy; p.a += p.va; p.rot += p.vr; p.x += Math.sin(p.a)*p.sw*.6;
+      if(p.y > H+20){ Object.assign(p, make(true)); p.y = -20; }
+      if(p.petal){
+        cx.save(); cx.translate(p.x,p.y); cx.rotate(p.rot); cx.scale(1, .55+.45*Math.abs(Math.sin(p.a*2)));
+        cx.globalAlpha = .55; cx.fillStyle = p.c;
+        cx.beginPath(); cx.moveTo(0,-p.s); cx.quadraticCurveTo(p.s*.9,0,0,p.s); cx.quadraticCurveTo(-p.s*.9,0,0,-p.s); cx.fill();
+        cx.restore();
+      } else {
+        cx.globalAlpha = .25 + .55*(.5+.5*Math.sin(p.a*3)); cx.fillStyle = p.c;
+        cx.beginPath(); cx.arc(p.x,p.y,p.s,0,6.28); cx.fill();
+      }
+    }
+    cx.globalAlpha = 1;
+    raf = requestAnimationFrame(frame);
+  }
+  document.addEventListener("visibilitychange", ()=>{
+    if(!ps.length) return;
+    if(document.hidden){ on = false; cancelAnimationFrame(raf); } else if(!on){ on = true; frame(); }
+  });
+  window.addEventListener("resize", ()=>{ if(ps.length) size(); });
+  return { start(){
+    if(reduce || ps.length) return;
+    size();
+    const n = W < 400 ? 26 : 34;
+    for(let i=0;i<n;i++) ps.push(make(false));
+    on = true; frame();
+  }};
 })();
 
 /* ==================== scroll animatsiya ==================== */
