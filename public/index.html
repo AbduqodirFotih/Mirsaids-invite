@@ -186,10 +186,12 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 /* story photos */
 .story{position:relative;margin-top:26px}
 .story .photo-frame{margin-top:0}
-.story .p2{width:86%;margin:-34px 0 0 auto;rotate:2.5deg;z-index:2}
-.story .p1{width:92%;rotate:-2deg}
-.story .photo-in.land{aspect-ratio:3/2}
-.story .photo-in.port{aspect-ratio:736/606}
+.story-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.story .p1{rotate:-3deg}
+.story .p2{rotate:3deg;margin-top:28px}
+.story .p3{width:86%;margin:-10px auto 0;rotate:-1.5deg;z-index:2}
+.story .photo-in.tall{aspect-ratio:3/4.4}
+.story .photo-in.wide{aspect-ratio:4/5}
 .story-heart{position:absolute;left:8%;bottom:-16px;width:40px;height:40px;border-radius:50%;z-index:3;
   display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#f9e0a6,#c9974f 70%);
   border:2px solid #2b0001;box-shadow:0 0 18px rgba(225,188,124,.6);animation:sealPulse 2.4s ease-in-out infinite}
@@ -478,6 +480,7 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
 .rv.in .photo-in img{filter:none;transition:transform 2.2s cubic-bezier(.2,.8,.2,1),filter 1.6s ease}
 .story .p1.rv{transform:translateX(-40px) rotate(-6deg)}
 .story .p2.rv{transform:translateX(40px) rotate(6deg)}
+.story .p3.rv{transform:translateY(40px) scale(.9)}
 .story .rv.in{transform:none}
 
 /* ota-onalar ikki tomondan */
@@ -606,9 +609,9 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
     <span class="amp">&amp;</span>
     <span class="script n b">Maftuna</span>
     <svg class="gorn hero-divider" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
-    <figure class="arch hero-photo" data-full="photos/rings.jpg">
+    <figure class="arch hero-photo" data-full="photos/hero.jpg">
       <svg class="gorn arch-orn" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
-      <div class="arch-ring"><div class="arch-in"><img src="photos/rings.jpg" alt="Nikoh uzuklari" width="736" height="920"></div></div>
+      <div class="arch-ring"><div class="arch-in"><img src="photos/hero.jpg" alt="Kelin va kuyov" width="675" height="1200"></div></div>
       <i class="arch-gem"></i>
     </figure>
     <br>
@@ -652,19 +655,28 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
       <section class="sec">
         <h2 class="title rv">Baxtli lahzalar</h2>
         <div class="story">
-          <figure class="photo-frame p1 rv" data-full="photos/couple-1.jpg">
+          <div class="story-row">
+          <figure class="photo-frame p1 rv" data-full="photos/moment-1.jpg">
             <img class="fc tl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
             <img class="fc tr" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
             <img class="fc bl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
             <img class="fc br" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
-            <div class="photo-in port"><img src="photos/couple-1.jpg" alt="Kelin va kuyov"></div>
+            <div class="photo-in tall"><img src="photos/moment-1.jpg" alt="Kelin va kuyov" style="object-position:50% 45%"></div>
           </figure>
-          <figure class="photo-frame p2 rv" data-full="photos/couple-2.jpg">
+          <figure class="photo-frame p2 rv" data-full="photos/moment-2.jpg">
             <img class="fc tl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
             <img class="fc tr" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
             <img class="fc bl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
             <img class="fc br" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
-            <div class="photo-in land"><img src="photos/couple-2.jpg" alt="Kelin va kuyov"></div>
+            <div class="photo-in tall"><img src="photos/moment-2.jpg" alt="Kelin va kuyov" style="object-position:50% 55%"></div>
+          </figure>
+          </div>
+          <figure class="photo-frame p3 rv" data-full="photos/moment-3.jpg">
+            <img class="fc tl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc tr" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc bl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <img class="fc br" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
+            <div class="photo-in wide"><img src="photos/moment-3.jpg" alt="Kelin va kuyov" style="object-position:50% 30%"></div>
             <span class="story-heart"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg></span>
           </figure>
         </div>
