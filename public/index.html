@@ -451,8 +451,9 @@ body.go .flower-wrap .hero-flower{transform-origin:50% 100%;animation:sway 7s 2s
 .title.rv.in{letter-spacing:.1em;filter:none;transition:opacity 1s ease,transform 1s ease,letter-spacing 1.4s cubic-bezier(.2,.8,.2,1),filter 1.2s ease}
 
 /* ornamentlar markazdan chiziladi */
-.gorn.fdiv.rv{clip-path:inset(0 50% 0 50%);transform:none}
-.gorn.fdiv.rv.in{clip-path:inset(0 0 0 0);transition:clip-path 1.6s cubic-bezier(.6,0,.2,1),opacity .6s;animation:ornGlow 4s 1.6s ease-in-out infinite}
+.fdiv-wrap.rv{transform:none}
+.fdiv-wrap .gorn.fdiv{clip-path:inset(0 50% 0 50%)}
+.fdiv-wrap.rv.in .gorn.fdiv{clip-path:inset(0 0 0 0);transition:clip-path 1.6s cubic-bezier(.6,0,.2,1);animation:ornGlow 4s 1.6s ease-in-out infinite}
 body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-out infinite}
 @keyframes ornGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(225,188,124,.2))}50%{filter:drop-shadow(0 0 12px rgba(248,228,176,.75))}}
 
@@ -640,7 +641,7 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
         <p class="announce rv">Farzandlarimiz Mirsaid va Maftunaning<br>nikoh to'yi bo'lib o'tishini mamnuniyat bilan ma'lum qilamiz.<br>Ushbu quvonchli kunimizda sizni ham ko'rishni istardik.</p>
       </section>
 
-      <svg class="gorn fdiv rv" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
+      <div class="fdiv-wrap rv"><svg class="gorn fdiv" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg></div>
 
       <!-- Sana -->
       <section class="sec" style="margin-top:0">
@@ -683,7 +684,7 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
         <p class="story-cap rv">Ikki yurak — bir taqdir.<br>Hayotimizning yangi sahifasini siz bilan boshlamoqchimiz.</p>
       </section>
 
-      <svg class="gorn fdiv rv" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
+      <div class="fdiv-wrap rv"><svg class="gorn fdiv" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg></div>
 
       <!-- Hisoblagich + taqvim -->
       <section class="sec">
@@ -712,12 +713,12 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
     <h2 class="title rv">To'y marosimi manzili</h2>
     <p class="rv" style="margin-top:14px">«Start» to'yxonasi<br>Namangan viloyati, Uchqo'rg'on tumani</p>
 
-    <figure class="photo-frame rv" data-full="photos/venue.jpg">
+    <figure class="photo-frame rv" data-full="photos/venue-start.jpg">
       <img class="fc tl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
       <img class="fc tr" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
       <img class="fc bl" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
       <img class="fc br" src="images/frame-corner-top-left.webp" alt="" aria-hidden="true">
-      <div class="photo-in"><img src="photos/venue.jpg" alt="«Start» to'yxonasi binosi"></div>
+      <div class="photo-in"><img src="photos/venue-start.jpg" alt="«Start» to'yxonasi binosi"></div>
     </figure>
 
     <div class="hr" style="margin-top:26px"></div>
@@ -837,7 +838,7 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
 </div>
 <div id="lightbox"><img alt=""></div>
 <canvas id="petals" aria-hidden="true"></canvas>
-<audio id="bgMusic" loop preload="auto" src="music/toy.mp3"></audio>
+<audio id="bgMusic" loop preload="none" data-src="music/toy.mp3"></audio>
 <button id="music" aria-label="Musiqa" aria-pressed="false" title="Musiqa">
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2b0001" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5" fill="#2b0001"/><circle cx="16.5" cy="16" r="2.5" fill="#2b0001"/><path class="mute" d="M3 3l18 18" stroke-width="2.2"/></svg>
 </button>
@@ -882,11 +883,25 @@ const esc = s => s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"'
 $("#envDate").textContent = `${CFG.nikoh.d} ${MONTHS[CFG.nikoh.m-1].toLowerCase()}, ${CFG.nikoh.y}`;
 
 /* ==================== oldindan yuklash ==================== */
-/* Zarf ochilishidan oldin rasm, shrift va musiqa to'liq yuklab olinadi — sekin internetda ham hech narsa "tushib qolmaydi". */
+/* Zarf ochilishidan oldin barcha rasm va shriftlar, so'ng musiqa yuklanadi.
+   Rasmlar birinchi navbatda (sekin internetda musiqa ular bilan tarmoqni talashmasin).
+   Yuklanmay qolgan rasm 3 martagacha qayta so'raladi. */
+function retryImg(img){
+  const base = img.dataset.src0 || (img.dataset.src0 = img.getAttribute("src"));
+  const n = +(img.dataset.try || 0);
+  if(n >= 3) return;
+  img.dataset.try = n + 1;
+  setTimeout(()=>{ img.src = base + (base.includes("?") ? "&" : "?") + "r=" + (n+1); }, 1200*(n+1));
+}
+document.querySelectorAll("img[src]").forEach(img=>{
+  img.addEventListener("error", ()=>retryImg(img));
+  if(img.complete && !img.naturalWidth) retryImg(img);
+});
+
 const Preload = (()=>{
   const btn = $("#openBtn"), bar = $("#loadBar"), label = $("#loadTxt"), box = $("#load");
-  let ready = false, done = 0, total = 0, musicPart = 0;
-  const MUSIC_W = 6;
+  let ready = false, done = 0, total = 0, musicPart = 0, musicDone = false;
+  const MUSIC_W = 5;
   const keep = [];
   function paint(){
     const pct = Math.min(100, Math.round((done + musicPart*MUSIC_W) / total * 100));
@@ -897,7 +912,7 @@ const Preload = (()=>{
     bar.style.width = "100%"; label.textContent = "Tayyor";
     btn.disabled = false; setTimeout(()=>box.classList.add("ok"), 400);
   }
-  function step(){ done++; paint(); if(done + MUSIC_W >= total && musicPart >= 1) finish(); }
+  function check(){ if(done >= total - MUSIC_W && musicDone) finish(); }
 
   const imgs = new Set(["images/background.webp"]);
   document.querySelectorAll("img[src]").forEach(i=>imgs.add(i.getAttribute("src")));
@@ -905,34 +920,50 @@ const Preload = (()=>{
   total = imgs.size + fonts.length + MUSIC_W;
   paint();
 
-  imgs.forEach(src=>{
+  let pending = imgs.size + fonts.length;
+  function step(){ done++; pending--; paint(); if(pending === 0) loadMusic(); check(); }
+
+  function loadImg(src, attempt){
     const im = new Image(); keep.push(im);
     im.onload = ()=>{ (im.decode ? im.decode() : Promise.resolve()).catch(()=>{}).then(step); };
-    im.onerror = step;
-    im.src = src;
-  });
+    im.onerror = ()=>{
+      if(attempt < 3) setTimeout(()=>loadImg(src, attempt+1), 1200*(attempt+1));
+      else step();
+    };
+    im.src = attempt ? src + (src.includes("?") ? "&" : "?") + "r=" + attempt : src;
+  }
+  imgs.forEach(src=>loadImg(src, 0));
   fonts.forEach(f=>{ (document.fonts && document.fonts.load ? document.fonts.load(f) : Promise.resolve()).catch(()=>{}).then(step); });
 
   const audio = $("#bgMusic");
-  (async ()=>{
-    try{
-      const r = await fetch(audio.getAttribute("src"));
-      if(!r.ok || !r.body) throw 0;
-      const len = +r.headers.get("Content-Length") || 0, reader = r.body.getReader(), parts = [];
-      let got = 0;
-      for(;;){
-        const {done:end, value} = await reader.read();
-        if(end) break;
-        parts.push(value); got += value.length;
-        if(len){ musicPart = got/len; paint(); }
+  let musicStarted = false;
+  async function loadMusic(){
+    if(musicStarted) return; musicStarted = true;
+    const src = audio.dataset.src;
+    for(let attempt = 0; attempt < 3; attempt++){
+      try{
+        const r = await fetch(src);
+        if(!r.ok || !r.body) throw 0;
+        const len = +r.headers.get("Content-Length") || 0, reader = r.body.getReader(), parts = [];
+        let got = 0;
+        for(;;){
+          const {done:end, value} = await reader.read();
+          if(end) break;
+          parts.push(value); got += value.length;
+          if(len){ musicPart = got/len; paint(); }
+        }
+        audio.src = URL.createObjectURL(new Blob(parts, {type:"audio/mpeg"}));
+        break;
+      }catch(e){
+        if(attempt === 2){ audio.src = src; audio.preload = "auto"; }
+        else await new Promise(r=>setTimeout(r, 1500));
       }
-      audio.src = URL.createObjectURL(new Blob(parts, {type:"audio/mpeg"}));
-    }catch(e){ audio.preload = "auto"; }
-    musicPart = 1; paint();
-    if(done + MUSIC_W >= total) finish();
-  })();
+    }
+    musicPart = 1; musicDone = true; paint(); check();
+  }
 
-  setTimeout(finish, 20000); // juda sekin internetda ham 20 soniyadan keyin ochishga ruxsat
+  // juda sekin internetda ham 45 soniyadan keyin ochishga ruxsat (qolgani fonda yuklanaveradi)
+  setTimeout(()=>{ if(!audio.src){ audio.src = audio.dataset.src; } finish(); }, 45000);
   return { get ready(){ return ready; } };
 })();
 
@@ -1063,11 +1094,23 @@ $("#sched").innerHTML = CFG.schedule.map(([t,e,n])=>
     head.hidden = !items.length;
     list.innerHTML = items.map(card).join("");
   }
-  let items = [];
-  fetch("/api/wish", { cache: "no-store" })
-    .then(r => r.json())
-    .then(j => { if (j && j.ok) { items = j.wishes || []; show(items); } })
-    .catch(()=>{});
+  const MINE = "toy_my_wishes";
+  const mine = ()=>{ try{ return JSON.parse(localStorage.getItem(MINE)) || []; }catch{ return []; } };
+  const same = (a,b)=> a.t === b.t && a.n === b.n;
+  function merge(server){
+    const all = server.slice();
+    mine().forEach(w=>{ if(!all.some(x=>same(x,w))) all.push(w); });
+    return all.sort((a,b)=>b.t-a.t);
+  }
+  let items = merge([]);
+  show(items);
+  function load(attempt){
+    fetch("/api/wish", { cache: "no-store" })
+      .then(r => r.json())
+      .then(j => { if (j && j.ok) { items = merge(j.wishes || []); show(items); } else throw 0; })
+      .catch(()=>{ if(attempt < 4) setTimeout(()=>load(attempt+1), 2000*(attempt+1)); });
+  }
+  load(0);
 
   form.addEventListener("submit", async e=>{
     e.preventDefault();
@@ -1081,7 +1124,9 @@ $("#sched").innerHTML = CFG.schedule.map(([t,e,n])=>
       });
       const j = await r.json().catch(()=>({}));
       if(!r.ok || !j.ok) throw new Error("fail");
-      items.unshift(j.wish || { n:name, m:text, t:Date.now() });
+      const w = j.wish || { n:name, m:text, t:Date.now() };
+      try{ const m = mine(); m.push(w); localStorage.setItem(MINE, JSON.stringify(m)); }catch{}
+      items = merge([w, ...items]);
       show(items);
       ok.textContent = "Rahmat! Tilagingiz qo'shildi ♡";
       $("#wText").value = "";

@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   if (req.method === "GET") {
     try {
       const wishes = await db.list("wishes", 1000);
-      res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=50");
+      res.setHeader("Cache-Control", "no-store");
       return res.status(200).json({ ok: true, wishes });
     } catch (e) {
       console.error(e.message);
