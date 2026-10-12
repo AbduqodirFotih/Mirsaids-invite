@@ -300,10 +300,10 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 .wishes{margin:26px 16px 0;display:flex;flex-direction:column;gap:12px;max-height:520px;overflow-y:auto;padding-right:2px}
 .wishes::-webkit-scrollbar{width:4px}.wishes::-webkit-scrollbar-thumb{background:var(--gold-soft);border-radius:4px}
 .wish{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:rgba(0,0,0,.14)}
-.wish .h{display:flex;justify-content:space-between;gap:10px;font-size:13px}
+.wish .h{display:flex;justify-content:space-between;gap:10px;font-size:13px;line-height:20px}
 .wish .h b{color:var(--gold);font-size:14.5px}
 .wish .h span{color:#a58a58;font-size:12px;white-space:nowrap}
-.wish p{margin-top:8px;font-size:15.5px;line-height:1.55;color:var(--gold)}
+.wish p{margin-top:8px;font-size:15.5px;line-height:24px;color:var(--gold)}
 .empty{text-align:center;color:#a58a58;font-size:15px;padding:10px 0}
 
 /* ---------- reveal & modal ---------- */
@@ -1097,10 +1097,21 @@ $("#sched").innerHTML = CFG.schedule.map(([t,e,n])=>
     const when = isNaN(d) ? "" : `${p2(d.getDate())}.${p2(d.getMonth()+1)}.${d.getFullYear()} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
     return `<div class="wish"><div class="h"><b>${esc(w.n)}</b><span>${when}</span></div><p>${esc(w.m)}</p></div>`;
   }
+  // Kartochka balandliklari butun piksel bo'lishi shart: aks holda qutining oxiri kasr
+  // piksel "yetmay" qoladi va oxirgi tilakdan keyin aylantirish sahifaga o'tmay qotadi.
+  function snapHeights(){
+    const cards = [...list.children];
+    cards.forEach(c=>{ c.style.height = ""; });
+    const hs = cards.map(c=>Math.ceil(c.getBoundingClientRect().height));
+    cards.forEach((c,i)=>{ c.style.height = hs[i] + "px"; });
+  }
   function show(items){
     head.hidden = !items.length;
     list.innerHTML = items.map(card).join("");
+    snapHeights();
   }
+  let rsz; addEventListener("resize", ()=>{ clearTimeout(rsz); rsz = setTimeout(snapHeights, 150); });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(snapHeights);
   const MINE = "toy_my_wishes";
   const mine = ()=>{ try{ return JSON.parse(localStorage.getItem(MINE)) || []; }catch{ return []; } };
   const same = (a,b)=> a.t === b.t && a.n === b.n;
