@@ -26,12 +26,12 @@
   --text:#ecd4a3;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{
   font-variant-numeric:lining-nums;
   background:#0f0000;color:var(--text);
   font-family:"EB Garamond",Georgia,serif;
-  min-height:100vh;overflow-x:hidden;
+  min-height:100vh;
 }
 body.locked{overflow:hidden;height:100vh}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
@@ -48,6 +48,7 @@ img{max-width:100%}
   background-repeat:no-repeat,no-repeat,repeat-y;
   background-size:100% 100%,100% 100%,100% auto;
   box-shadow:0 0 80px rgba(0,0,0,.85);
+  overflow-x:hidden;overflow-x:clip;
 }
 .hidden{display:none!important}
 
@@ -296,7 +297,9 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 .wish-form textarea{margin-top:16px;height:110px;resize:none}
 .wish-form ::placeholder{color:rgba(225,188,124,.5)}
 .wish-form .right{display:flex;justify-content:flex-end;margin-top:16px}
-.wishes{margin:26px 16px 0;display:flex;flex-direction:column;gap:12px;max-height:520px;overflow-y:auto;padding-right:2px}
+.wishes{margin:26px 16px 0;display:flex;flex-direction:column;gap:12px}
+.more-wishes{display:block;margin:18px auto 0;padding:9px 22px;border-radius:999px;border:1px solid var(--line);background:rgba(225,188,124,.08);color:var(--gold);font-family:"Lora",serif;font-size:14px}
+.more-wishes[hidden]{display:none}
 .wishes::-webkit-scrollbar{width:4px}.wishes::-webkit-scrollbar-thumb{background:var(--gold-soft);border-radius:4px}
 .wish{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:rgba(0,0,0,.14)}
 .wish .h{display:flex;justify-content:space-between;gap:10px;font-size:13px}
@@ -329,11 +332,13 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 #music.playing::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--gold-soft);animation:ring 2.4s ease-out infinite}
 @keyframes ring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.35);opacity:0}}
 
-.sign{margin:6px 28px 0;padding-bottom:44px;text-align:center}
+.sign{margin:6px 28px 0;padding-bottom:96px;text-align:center}
 .sign .orn{display:flex;align-items:center;gap:12px;color:var(--gold-soft);margin-bottom:16px}
 .sign .orn i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line))}
 .sign .orn i:last-child{background:linear-gradient(90deg,var(--line),transparent)}
-.sign small{display:block;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:#8f7a4d;margin-bottom:12px}
+.sign small{display:block;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:#8f7a4d;margin-bottom:6px}
+.sign-name{font-family:"Pattaya",cursive;font-size:24px;color:var(--gold);margin-bottom:10px}
+.sign-uz{max-width:300px;margin:0 auto 16px;font-size:14px;line-height:1.55;color:#b79c66}
 .tg{display:inline-flex;align-items:center;gap:9px;padding:10px 20px 10px 15px;border-radius:999px;
   border:1px solid rgba(225,188,124,.42);background:rgba(225,188,124,.06);color:var(--gold);text-decoration:none;
   font-family:"Lora",serif;font-size:14px;letter-spacing:.02em;transition:background .25s,border-color .25s,box-shadow .25s}
@@ -343,6 +348,8 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 
 /* gift stage */
 .gift-stage{position:relative;width:320px;max-width:100%;height:330px;margin:10px auto 0;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+.gift-sec{overflow-x:hidden;overflow-x:clip}
+.gift-stage.still,.gift-stage.still *,.gift-stage.still *::before,.gift-stage.still *::after{animation-play-state:paused!important}
 .gift-rays{position:absolute;left:50%;top:48%;width:360px;height:360px;translate:-50% -50%;border-radius:50%;pointer-events:none;opacity:.55;
   background:repeating-conic-gradient(from 0deg,rgba(248,228,176,.22) 0deg 6deg,rgba(248,228,176,0) 6deg 18deg);
   -webkit-mask:radial-gradient(circle,#000 18%,transparent 66%);mask:radial-gradient(circle,#000 18%,transparent 66%);
@@ -405,17 +412,17 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 @keyframes pFly{0%{transform:translate(0,0) rotate(0) scale(.6);opacity:0}10%{opacity:1}100%{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1);opacity:0}}
 
 /* bottom sheet */
-#sheetBack{position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.62);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+#sheetBack{position:fixed;inset:0;touch-action:none;z-index:95;background:rgba(0,0,0,.62);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
 #sheetBack.on{opacity:1;visibility:visible}
-#sheet{position:fixed;left:50%;bottom:0;z-index:96;width:min(430px,100%);transform:translate(-50%,105%);
+#sheet{position:fixed;left:0;right:0;margin:0 auto;bottom:0;z-index:96;width:100%;max-width:430px;transform:translateY(105%);overscroll-behavior:contain;
   visibility:hidden;transition:transform .5s cubic-bezier(.2,.9,.3,1),visibility 0s .5s;border-radius:22px 22px 0 0;overflow:hidden;
   background:linear-gradient(170deg,#56000c,#1c0000);box-shadow:0 -10px 50px rgba(0,0,0,.6)}
-#sheet.on{transform:translate(-50%,0);visibility:visible;transition:transform .5s cubic-bezier(.2,.9,.3,1),visibility 0s}
+#sheet.on{transform:translateY(0);visibility:visible;transition:transform .5s cubic-bezier(.2,.9,.3,1),visibility 0s}
 .sh-head{display:flex;align-items:center;justify-content:center;position:relative;height:66px;background:linear-gradient(180deg,#eac889,#dbab60)}
 .sh-head span{font-family:"EB Garamond",serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:19px;color:#2b0001}
 .sh-head button{position:absolute;right:16px;top:50%;translate:0 -50%;font-size:30px;line-height:1;color:rgba(43,0,1,.8);padding:4px 8px}
 .sh-body{padding:26px 28px 38px;text-align:center}
-.sh-icon{width:54px;height:auto;margin:0 auto 12px;display:block;animation:giftBob 3s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+.sh-icon{width:54px;height:auto;margin:0 auto 12px;display:block;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
 .sh-body p{font-family:"EB Garamond",serif;font-size:21px;line-height:1.5;color:var(--gold);min-height:64px;display:grid;place-items:center}
 .sh-orn{display:flex;align-items:center;gap:10px;justify-content:center;margin:16px auto 20px;width:60%;color:var(--gold-soft)}
 .sh-orn i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-soft))}
@@ -610,9 +617,9 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
     <span class="amp">&amp;</span>
     <span class="script n b">Maftuna</span>
     <svg class="gorn hero-divider" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
-    <figure class="arch hero-photo" data-full="photos/hero.jpg">
+    <figure class="arch hero-photo" data-full="photos/hero-v2.jpg">
       <svg class="gorn arch-orn" viewBox="0 0 300 100" aria-hidden="true"><use href="#divider"/></svg>
-      <div class="arch-ring"><div class="arch-in"><img src="photos/hero.jpg" alt="Kelin va kuyov" width="675" height="1200"></div></div>
+      <div class="arch-ring"><div class="arch-in"><img src="photos/hero-v2.jpg" alt="Kelin va kuyov" width="900" height="1599"></div></div>
       <i class="arch-gem"></i>
     </figure>
     <br>
@@ -756,10 +763,11 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
     <p class="wish-ok" id="wishOk"></p>
     <h3 class="wish-head rv" id="wishHead" hidden>Mehmonlar tilaklari</h3>
     <div class="wishes" id="wishes"></div>
+    <button class="more-wishes" id="moreWishes" hidden></button>
   </section>
 
   <!-- GIFT -->
-  <section class="sec" style="margin-top:58px">
+  <section class="sec gift-sec" style="margin-top:58px">
     <h2 class="title rv">Tilak qutisi</h2>
     <div class="gift-stage rv" id="gift" role="button" tabindex="0" aria-label="Sovg'a qutisini ochish">
       <div class="gift-rays"></div>
@@ -799,6 +807,8 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
   <div class="sign rv">
     <div class="orn"><i></i><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg><i></i></div>
     <small>Digital Invitation by</small>
+    <div class="sign-name">Abduqodir Fotih</div>
+    <p class="sign-uz">Ushbu taklifnomani Abduqodir Fotih yaratdi.<br>Shunday taklifnoma buyurtma qilish uchun murojaat qiling:</p>
     <a class="tg" href="https://t.me/Abduqodir_Fotih" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M21 3L3 10.6l6.2 2.4L11.6 20l3.1-4.2L19 19.5 21 3z"/><path d="M9.2 13l11.8-10"/></svg>
       @Abduqodir_Fotih
@@ -1090,10 +1100,16 @@ $("#sched").innerHTML = CFG.schedule.map(([t,e,n])=>
     const when = isNaN(d) ? "" : `${p2(d.getDate())}.${p2(d.getMonth()+1)}.${d.getFullYear()} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
     return `<div class="wish"><div class="h"><b>${esc(w.n)}</b><span>${when}</span></div><p>${esc(w.m)}</p></div>`;
   }
+  const more = $("#moreWishes");
+  let shown = 6;
   function show(items){
     head.hidden = !items.length;
-    list.innerHTML = items.map(card).join("");
+    list.innerHTML = items.slice(0, shown).map(card).join("");
+    const left = items.length - shown;
+    more.hidden = left <= 0;
+    if(left > 0) more.textContent = `Yana ${Math.min(left, 10)} ta tilakni ko'rsatish (jami ${items.length})`;
   }
+  more.addEventListener("click", ()=>{ shown += 10; show(items); });
   const MINE = "toy_my_wishes";
   const mine = ()=>{ try{ return JSON.parse(localStorage.getItem(MINE)) || []; }catch{ return []; } };
   const same = (a,b)=> a.t === b.t && a.n === b.n;
@@ -1178,10 +1194,10 @@ $("#sched").innerHTML = CFG.schedule.map(([t,e,n])=>
     stage.classList.remove("pop","shake"); void stage.offsetWidth;
     stage.classList.add("shake");
     setTimeout(()=>{ stage.classList.remove("shake"); void stage.offsetWidth; stage.classList.add("pop"); particles(); }, 480);
-    setTimeout(()=>{ sheet.classList.add("on"); back.classList.add("on"); }, 1350);
+    setTimeout(()=>{ stage.classList.add("still"); sheet.classList.add("on"); back.classList.add("on"); }, 1350);
     setTimeout(()=>{ stage.classList.remove("pop"); busy = false; }, 2300);
   }
-  function close(){ sheet.classList.remove("on"); back.classList.remove("on"); }
+  function close(){ sheet.classList.remove("on"); back.classList.remove("on"); stage.classList.remove("still"); }
   stage.addEventListener("click", open);
   stage.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); open(); }});
   back.addEventListener("click", close);
