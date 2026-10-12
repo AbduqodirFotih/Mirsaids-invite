@@ -297,7 +297,7 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 .wish-form textarea{margin-top:16px;height:110px;resize:none}
 .wish-form ::placeholder{color:rgba(225,188,124,.5)}
 .wish-form .right{display:flex;justify-content:flex-end;margin-top:16px}
-.wishes{margin:26px 16px 0;display:flex;flex-direction:column;gap:12px;max-height:520px;overflow-y:auto;overscroll-behavior-y:auto;-webkit-overflow-scrolling:touch;padding-right:4px}
+.wishes{margin:26px 16px 0;display:flex;flex-direction:column;gap:12px;max-height:520px;overflow-y:auto;padding-right:2px}
 .wishes::-webkit-scrollbar{width:4px}.wishes::-webkit-scrollbar-thumb{background:var(--gold-soft);border-radius:4px}
 .wish{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:rgba(0,0,0,.14)}
 .wish .h{display:flex;justify-content:space-between;gap:10px;font-size:13px}
@@ -1101,17 +1101,6 @@ $("#sched").innerHTML = CFG.schedule.map(([t,e,n])=>
     head.hidden = !items.length;
     list.innerHTML = items.map(card).join("");
   }
-  // Tilaklar qutisi chetiga yetganda aylantirish sahifaga o'tadi (qotib qolmaydi)
-  const atEdge = d => d > 0 ? list.scrollTop + list.clientHeight >= list.scrollHeight - 1 : list.scrollTop <= 0;
-  let lastY = 0;
-  list.addEventListener("touchstart", e=>{ lastY = e.touches[0].clientY; }, {passive:true});
-  list.addEventListener("touchmove", e=>{
-    const y = e.touches[0].clientY, d = lastY - y; lastY = y;
-    if(d && atEdge(d)){ e.preventDefault(); window.scrollBy(0, d); }
-  }, {passive:false});
-  list.addEventListener("wheel", e=>{
-    if(e.deltaY && atEdge(e.deltaY)){ e.preventDefault(); window.scrollBy(0, e.deltaY); }
-  }, {passive:false});
   const MINE = "toy_my_wishes";
   const mine = ()=>{ try{ return JSON.parse(localStorage.getItem(MINE)) || []; }catch{ return []; } };
   const same = (a,b)=> a.t === b.t && a.n === b.n;
@@ -1327,10 +1316,20 @@ const Petals = (()=>{
 
 /* ==================== scroll animatsiya ==================== */
 function observe(){
-  const io = new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
-  }),{threshold:.12});
-  document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+  const pending = new Set(document.querySelectorAll(".rv"));
+  const reveal = el => { el.classList.add("in"); io.unobserve(el); pending.delete(el); };
+  const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) reveal(e.target); }),{threshold:.12});
+  pending.forEach(el=>io.observe(el));
+  // tez aylantirilganda o'tkazib yuborilgan bo'limlar ham albatta ochiladi
+  function sweep(){
+    const lim = innerHeight * .92;
+    pending.forEach(el=>{ if(el.getBoundingClientRect().top < lim) reveal(el); });
+    if(!pending.size) removeEventListener("scroll", onScroll);
+  }
+  let queued = false;
+  function onScroll(){ if(!queued){ queued = true; requestAnimationFrame(()=>{ queued = false; sweep(); }); } }
+  addEventListener("scroll", onScroll, {passive:true});
+  sweep();
 }
 </script>
 </body>
