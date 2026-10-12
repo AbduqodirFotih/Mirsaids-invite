@@ -297,9 +297,7 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 .wish-form textarea{margin-top:16px;height:110px;resize:none}
 .wish-form ::placeholder{color:rgba(225,188,124,.5)}
 .wish-form .right{display:flex;justify-content:flex-end;margin-top:16px}
-.wishes{margin:26px 16px 0;display:flex;flex-direction:column;gap:12px}
-.more-wishes{display:block;margin:18px auto 0;padding:9px 22px;border-radius:999px;border:1px solid var(--line);background:rgba(225,188,124,.08);color:var(--gold);font-family:"Lora",serif;font-size:14px}
-.more-wishes[hidden]{display:none}
+.wishes{margin:26px 16px 0;display:flex;flex-direction:column;gap:12px;max-height:520px;overflow-y:auto;overscroll-behavior-y:auto;-webkit-overflow-scrolling:touch;padding-right:4px}
 .wishes::-webkit-scrollbar{width:4px}.wishes::-webkit-scrollbar-thumb{background:var(--gold-soft);border-radius:4px}
 .wish{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:rgba(0,0,0,.14)}
 .wish .h{display:flex;justify-content:space-between;gap:10px;font-size:13px}
@@ -763,7 +761,6 @@ body.go .hero-divider{animation:fadeUp 1.2s 2.6s both,ornGlow 4s 3.8s ease-in-ou
     <p class="wish-ok" id="wishOk"></p>
     <h3 class="wish-head rv" id="wishHead" hidden>Mehmonlar tilaklari</h3>
     <div class="wishes" id="wishes"></div>
-    <button class="more-wishes" id="moreWishes" hidden></button>
   </section>
 
   <!-- GIFT -->
@@ -1100,16 +1097,21 @@ $("#sched").innerHTML = CFG.schedule.map(([t,e,n])=>
     const when = isNaN(d) ? "" : `${p2(d.getDate())}.${p2(d.getMonth()+1)}.${d.getFullYear()} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
     return `<div class="wish"><div class="h"><b>${esc(w.n)}</b><span>${when}</span></div><p>${esc(w.m)}</p></div>`;
   }
-  const more = $("#moreWishes");
-  let shown = 6;
   function show(items){
     head.hidden = !items.length;
-    list.innerHTML = items.slice(0, shown).map(card).join("");
-    const left = items.length - shown;
-    more.hidden = left <= 0;
-    if(left > 0) more.textContent = `Yana ${Math.min(left, 10)} ta tilakni ko'rsatish (jami ${items.length})`;
+    list.innerHTML = items.map(card).join("");
   }
-  more.addEventListener("click", ()=>{ shown += 10; show(items); });
+  // Tilaklar qutisi chetiga yetganda aylantirish sahifaga o'tadi (qotib qolmaydi)
+  const atEdge = d => d > 0 ? list.scrollTop + list.clientHeight >= list.scrollHeight - 1 : list.scrollTop <= 0;
+  let lastY = 0;
+  list.addEventListener("touchstart", e=>{ lastY = e.touches[0].clientY; }, {passive:true});
+  list.addEventListener("touchmove", e=>{
+    const y = e.touches[0].clientY, d = lastY - y; lastY = y;
+    if(d && atEdge(d)){ e.preventDefault(); window.scrollBy(0, d); }
+  }, {passive:false});
+  list.addEventListener("wheel", e=>{
+    if(e.deltaY && atEdge(e.deltaY)){ e.preventDefault(); window.scrollBy(0, e.deltaY); }
+  }, {passive:false});
   const MINE = "toy_my_wishes";
   const mine = ()=>{ try{ return JSON.parse(localStorage.getItem(MINE)) || []; }catch{ return []; } };
   const same = (a,b)=> a.t === b.t && a.n === b.n;
